@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Sistema_Advocacia.Models.PeticaoModelo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NaturezaAcao.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Peticao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NaturezaAcao.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Peticao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comentario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PedicaoModeloId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PedicaoModeloId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PedicaoModeloId })
+        </td>
+    </tr>
+}
+
+</table>

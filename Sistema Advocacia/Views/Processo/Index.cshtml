@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Sistema_Advocacia.Models.Processo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NaturezaAcao.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResumoDoCaso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroProcesso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LinkProcesso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vara)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NaturezaAcao.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comentario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResumoDoCaso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroProcesso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LinkProcesso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vara)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProcessoId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProcessoId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProcessoId })
+        </td>
+    </tr>
+}
+
+</table>
