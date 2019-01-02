@@ -157,6 +157,9 @@
     <Compile Include="Controllers\NaturezaAcaoController.cs" />
     <Compile Include="Controllers\PeticaoModeloController.cs" />
     <Compile Include="Controllers\ProcessoController.cs" />
+    <Compile Include="Controllers\ProcessoDocumentoController.cs" />
+    <Compile Include="Controllers\ProcessoPeticaoController.cs" />
+    <Compile Include="Controllers\ProcessoTabelaValorController.cs" />
     <Compile Include="Controllers\TesteController.cs" />
     <Compile Include="Gerador\Gerador.cs" />
     <Compile Include="Gerador\PerguntaPeticao.cs" />
@@ -172,6 +175,9 @@
     <Compile Include="Models\NaturezaAcao.cs" />
     <Compile Include="Models\PeticaoModelo.cs" />
     <Compile Include="Models\Processo.cs" />
+    <Compile Include="Models\ProcessoDocumento.cs" />
+    <Compile Include="Models\ProcessoPeticao.cs" />
+    <Compile Include="Models\ProcessoTabelaValores.cs" />
     <Compile Include="Models\Teste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -195,6 +201,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -256,6 +264,21 @@
     <Content Include="Views\ClienteDocumento\Details.cshtml" />
     <Content Include="Views\ClienteDocumento\Edit.cshtml" />
     <Content Include="Views\ClienteDocumento\Index.cshtml" />
+    <Content Include="Views\ProcessoDocumento\Create.cshtml" />
+    <Content Include="Views\ProcessoDocumento\Delete.cshtml" />
+    <Content Include="Views\ProcessoDocumento\Details.cshtml" />
+    <Content Include="Views\ProcessoDocumento\Edit.cshtml" />
+    <Content Include="Views\ProcessoDocumento\Index.cshtml" />
+    <Content Include="Views\ProcessoPeticao\Create.cshtml" />
+    <Content Include="Views\ProcessoPeticao\Delete.cshtml" />
+    <Content Include="Views\ProcessoPeticao\Details.cshtml" />
+    <Content Include="Views\ProcessoPeticao\Edit.cshtml" />
+    <Content Include="Views\ProcessoPeticao\Index.cshtml" />
+    <Content Include="Views\ProcessoTabelaValor\Create.cshtml" />
+    <Content Include="Views\ProcessoTabelaValor\Delete.cshtml" />
+    <Content Include="Views\ProcessoTabelaValor\Details.cshtml" />
+    <Content Include="Views\ProcessoTabelaValor\Edit.cshtml" />
+    <Content Include="Views\ProcessoTabelaValor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

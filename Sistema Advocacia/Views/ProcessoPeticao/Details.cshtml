@@ -1,0 +1,66 @@
+﻿@model Sistema_Advocacia.Models.ProcessoPeticao
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProcessoPeticao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PeticaoModelo.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PeticaoModelo.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcessoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkQuestionario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkQuestionario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkPeticao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkPeticao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Finalizada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Finalizada)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProcessoPeticaoId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

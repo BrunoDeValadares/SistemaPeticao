@@ -95,7 +95,7 @@ namespace Sistema_Advocacia.Models
             get
             {
                 string logradouro = string.Format("residente e domiciliado à {0},", Logradouro);
-                string numero = string.Format("nº {0},", Numero);
+                string numero = string.Format("nº {0},", Numero);                
                 string setor = string.Format("Setor {0},", Setor);
 
                 string endereco = string.Format("{0} {1} {2} {3}-{4}", logradouro, numero, setor, Cidade, Estado);

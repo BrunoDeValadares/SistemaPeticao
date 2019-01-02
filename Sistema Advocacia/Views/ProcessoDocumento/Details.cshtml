@@ -1,0 +1,58 @@
+﻿@model Sistema_Advocacia.Models.ProcessoDocumento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProcessoDocumento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Documento.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Documento.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Processo.Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Processo.Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Entregue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Entregue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Link)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Link)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProcessoDocumentoId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

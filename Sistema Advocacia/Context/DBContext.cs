@@ -39,5 +39,11 @@ namespace Sistema_Advocacia.Context
         public System.Data.Entity.DbSet<Sistema_Advocacia.Models.Cliente> Clientes { get; set; }
 
         public System.Data.Entity.DbSet<Sistema_Advocacia.Models.Teste> Testes { get; set; }
+
+        public System.Data.Entity.DbSet<Sistema_Advocacia.Models.ProcessoDocumento> ProcessoDocumentoes { get; set; }        
+
+        public System.Data.Entity.DbSet<Sistema_Advocacia.Models.ProcessoPeticao> ProcessoPeticaos { get; set; }
+
+        public System.Data.Entity.DbSet<Sistema_Advocacia.Models.ProcessoTabelaValor> ProcessoTabelaValors { get; set; }
     }
 }

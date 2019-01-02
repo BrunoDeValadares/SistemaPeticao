@@ -11,6 +11,7 @@ namespace Sistema_Advocacia.Models
         [Key]
         public int PedicaoModeloId { get; set; }
 
+
         [Required(ErrorMessage ="Digite um valor para o campo {0}!")]
         public string Nome { get; set; }        
 

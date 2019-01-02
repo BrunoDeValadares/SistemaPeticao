@@ -39,5 +39,7 @@ namespace Sistema_Advocacia.Models
         public virtual Cliente Cliente{ get; set; }
 
         public virtual NaturezaAcao NaturezaAcao { get; set; }
+
+        public virtual ICollection<ProcessoDocumento> ProcessoDocumentos { get; set; }
     }
 }
