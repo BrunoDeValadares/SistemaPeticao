@@ -71,11 +71,10 @@
                 @Html.DisplayFor(modelItem => item.Vara)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProcessoId }) 
-                @Html.ActionLink("Details", "Details", new { id = item.ProcessoId }) 
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProcessoId })
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProcessoId })
-                @Html.ActionLink("Docs", "Docs", new { id = item.ProcessoId })                
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProcessoId })|
+                @Html.ActionLink("Details", "Details", new { id = item.ProcessoId })| 
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProcessoId })|               
+                @Html.ActionLink("Docs", "TodoProcesso", new { id = item.ProcessoId })                
             </td>
         </tr>
     }

@@ -177,9 +177,10 @@
     <Compile Include="Models\Processo.cs" />
     <Compile Include="Models\ProcessoDocumento.cs" />
     <Compile Include="Models\ProcessoPeticao.cs" />
-    <Compile Include="Models\ProcessoTabelaValores.cs" />
+    <Compile Include="Models\ProcessoTabelaValor.cs" />
     <Compile Include="Models\Teste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\TodoProcesso.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -279,6 +280,7 @@
     <Content Include="Views\ProcessoTabelaValor\Details.cshtml" />
     <Content Include="Views\ProcessoTabelaValor\Edit.cshtml" />
     <Content Include="Views\ProcessoTabelaValor\Index.cshtml" />
+    <Content Include="Views\Processo\TodoProcesso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

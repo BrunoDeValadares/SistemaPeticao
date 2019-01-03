@@ -28,7 +28,7 @@ namespace Sistema_Advocacia.Models
 
 
         [DataType(DataType.Date)]        
-        [Display(Name ="Atualizado até")]
+        [Display(Name ="Atualizado até")]        
         public DateTime DataAtualizacao { get; set; }
 
         [Required]

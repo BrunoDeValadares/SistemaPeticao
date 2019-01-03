@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Sistema_Advocacia.Context;
 using Sistema_Advocacia.Models;
+using Sistema_Advocacia.ViewModels;
 
 namespace Sistema_Advocacia.Controllers
 {
@@ -20,6 +21,18 @@ namespace Sistema_Advocacia.Controllers
         {
             var processoes = db.Processoes.Include(p => p.Cliente).Include(p => p.NaturezaAcao);
             return View(processoes.ToList());
+        }
+
+        public ActionResult TodoProcesso(int? id)
+        {
+            TodoProcesso todoProcesso = new TodoProcesso();
+
+            todoProcesso.Processo = db.Processoes.Find(id);
+            todoProcesso.ProcessoPeticoes = db.ProcessoPeticaos.Where(x => x.ProcessoId == id).Include(x => x.PeticaoModelo).ToList();
+            todoProcesso.ProcessoDocumentos = db.ProcessoDocumentoes.Where(x => x.ProcessoDocumentoId == id).Include(x => x.Documento).ToList();
+            todoProcesso.ProcessoTabelaValores = db.ProcessoTabelaValors.Where(x => x.ProcessoId == id).ToList();
+
+            return View(todoProcesso); 
         }
 
         // GET: Processo/Details/5

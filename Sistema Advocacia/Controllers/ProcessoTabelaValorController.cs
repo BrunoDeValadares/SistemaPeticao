@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Sistema_Advocacia.Context;
 using Sistema_Advocacia.Models;
+using Sistema_Advocacia.ViewModels;
 
 namespace Sistema_Advocacia.Controllers
 {
@@ -37,8 +38,13 @@ namespace Sistema_Advocacia.Controllers
         }
 
         // GET: ProcessoTabelaValor/Create
-        public ActionResult Create()
+        public ActionResult Create(int? processoId)
         {
+            if (processoId != null)
+            {
+                ProcessoTabelaValor processoTabelaValor = new ProcessoTabelaValor { ProcessoId = (int)processoId };
+                return View(processoTabelaValor);
+            }
             return View();
         }
 
@@ -53,7 +59,10 @@ namespace Sistema_Advocacia.Controllers
             {
                 db.ProcessoTabelaValors.Add(processoTabelaValor);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                //return RedirectToAction("TodoProcesso","Processo");
+
+                return RedirectToAction("TodoProcesso", "Processo", new {id = processoTabelaValor.ProcessoId});                
             }
 
             return View(processoTabelaValor);
@@ -85,9 +94,11 @@ namespace Sistema_Advocacia.Controllers
             {
                 db.Entry(processoTabelaValor).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("TodoProcesso", "Processo", new { id = processoTabelaValor.ProcessoId });
+                //return RedirectToAction("Index"); //unica alteração
             }
-            return View(processoTabelaValor);
+            return View(processoTabelaValor); 
+           
         }
 
         // GET: ProcessoTabelaValor/Delete/5

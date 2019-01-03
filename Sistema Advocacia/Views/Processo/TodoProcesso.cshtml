@@ -1,0 +1,163 @@
+﻿@using Sistema_Advocacia.Models
+@using Sistema_Advocacia.ViewModels
+@model TodoProcesso
+
+
+@{
+    ViewBag.Title = "Processo";
+}
+
+<h3>Petições</h3>
+
+<table class="table">
+    <tr>
+        <th>Petição</th>
+
+        <th>Processo</th>
+
+        <th>Questionário</th>
+
+        <th>Comentário</th>
+
+        <th>Petição</th>
+
+        <th>Finalizada?</th>
+
+        <th></th>
+    </tr>
+
+    @foreach (ProcessoPeticao processoPeticao in Model.ProcessoPeticoes)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => processoPeticao.PeticaoModelo.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => processoPeticao.ProcessoId)
+            </td>
+            <td>
+                @Html.ActionLink("Questionário", "Delete", new { id = processoPeticao.ProcessoPeticaoId })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => processoPeticao.Comentario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => processoPeticao.LinkPeticao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => processoPeticao.Finalizada)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = processoPeticao.ProcessoPeticaoId }) |
+                @Html.ActionLink("Details", "Details", new { id = processoPeticao.ProcessoPeticaoId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = processoPeticao.ProcessoPeticaoId })
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<h3>Documentos</h3>
+@Html.ActionLink("Novo", "Create", "ProcessoDocumento", new { processoId = Model.Processo.ProcessoId }, null)
+
+<table class="table">
+    <tr>
+        <th>Documento</th>
+
+        <th>Processo</th>
+
+        <th>Comentário</th>
+
+        <th>Entregue</th>
+
+        <th>Link</th>
+
+        <th></th>
+    </tr>
+
+    @foreach (ProcessoDocumento item in Model.ProcessoDocumentos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Documento.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProcessoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comentario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entregue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Link)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProcessoDocumentoId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProcessoDocumentoId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProcessoDocumentoId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<h3>Tabela de Valores</h3>
+@Html.ActionLink("Novo", "Create", "ProcessoTabelaValor", new { processoId = Model.Processo.ProcessoId }, null)
+
+<table class="table">
+    <tr>
+        <th>Processo</th>
+
+        <th>LinkDoc</th>
+
+        <th>Data Débito</th>
+
+        <th>Valor Original</th>
+
+        <th>Data Atualização</th>
+
+        <th>Valor Atualizado</th>
+
+        <th></th>
+    </tr>
+
+    @foreach (ProcessoTabelaValor item in Model.ProcessoTabelaValores)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProcessoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LinkDoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDebito)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorOriginal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAtualizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorAtualizado)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProcessoTabelaValorId }) |
+                @Html.ActionLink("Editar", "Edit", "ProcessoTabelaValor", new { id = Model.Processo.ProcessoId }, null)
+                @Html.ActionLink("Details", "Details", new { id = item.ProcessoTabelaValorId })
+                @Html.ActionLink("Detalhes", "Details", "ProcessoTabelaValor", new { id = Model.Processo.ProcessoId }, null)|
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProcessoTabelaValorId })
+                @Html.ActionLink("Deletar", "Delete", "ProcessoTabelaValor", new { id = Model.Processo.ProcessoId }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+

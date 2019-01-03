@@ -37,13 +37,33 @@ namespace Sistema_Advocacia.Controllers
             return View(processoDocumento);
         }
 
+        //CODIGO ORIGINAL
         // GET: ProcessoDocumento/Create
+        /*
         public ActionResult Create()
         {
             ViewBag.DocumentoId = new SelectList(db.Documentoes, "DocumentoId", "Nome");
             ViewBag.ProcessoId = new SelectList(db.Processoes, "ProcessoId", "Comentario");
             return View();
         }
+        */
+        //UNICA PARTE ALTERADA POR MIM
+        //**************************************************************************************************************************************************************
+        // GET: ProcessoDocumento/Create
+        public ActionResult Create(int? processoId)
+        {
+            ViewBag.DocumentoId = new SelectList(db.Documentoes, "DocumentoId", "Nome");
+            ViewBag.ProcessoId = new SelectList(db.Processoes, "ProcessoId", "ProcessoId");
+
+            if (processoId != null)
+            {
+                ProcessoDocumento processoDocumento = new ProcessoDocumento { ProcessoId = (int)processoId, Entregue =true, Comentario = "joia" };
+                return View(processoDocumento);
+            }
+
+            return View();
+        }
+
 
         // POST: ProcessoDocumento/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
