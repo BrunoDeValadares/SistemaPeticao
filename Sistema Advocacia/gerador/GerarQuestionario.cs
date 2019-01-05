@@ -26,26 +26,25 @@ namespace Sistema_Advocacia.gerador
 
 
 
-        public void CriarQuestionario(int peticaoModeloId)
+        public void CriarQuestionario(int processoPeticaoId)
         {
-            //ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);
-            PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(peticaoModeloId);
-            string TextoPeticao = peticaoModelo.Peticao;
+            ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);
+            //PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(peticaoModeloId);
+            string TextoPeticao = processoPeticao.PeticaoModelo.Peticao;
 
             if (TextoPeticao == null)
                 return;
 
             List<Pergunta> perguntas = ExtrairPerguntas(TextoPeticao);
-            //List<Pergunta> perguntas = gerador2.ExtrairPerguntas(peticaoModelo.Peticao); // correto
 
             //System.Diagnostics.Debug.WriteLine("******************************peticaoModelo.Nome" + processoPeticao.PeticaoModelo.Nome);
-
 
             foreach (var pergunta in perguntas)
             {
                 db.Questionarios.Add(new Questionario
                 {
-                    PeticaoModeloId = peticaoModeloId,
+                    PeticaoModeloId = processoPeticao.PeticaoModeloId,
+                    ProcessoPeticaoId = processoPeticao.ProcessoPeticaoId,
                     TituloTrecho = pergunta.TituloTrecho,
                     Pergunta = pergunta.pergunta,
                     DataModificacao = DateTime.Today
@@ -59,6 +58,32 @@ namespace Sistema_Advocacia.gerador
 
 
 
+        public void CriarQuestionario3(int peticaoModeloId)
+        {            
+            PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(peticaoModeloId);
+            string TextoPeticao = peticaoModelo.Peticao;
+
+            if (TextoPeticao == null)
+                return;
+
+            List<Pergunta> perguntas = ExtrairPerguntas(TextoPeticao);  
+
+            //System.Diagnostics.Debug.WriteLine("******************************peticaoModelo.Nome" + processoPeticao.PeticaoModelo.Nome);
+
+            foreach (var pergunta in perguntas)
+            {
+                db.Questionarios.Add(new Questionario
+                {                    
+                    PeticaoModeloId = peticaoModeloId,
+                    TituloTrecho = pergunta.TituloTrecho,
+                    Pergunta = pergunta.pergunta,
+                    DataModificacao = DateTime.Today
+                });
+
+
+            }
+            db.SaveChanges();
+        }
         public void CriarQuestionario2(int processoPeticaoId) 
         {
             ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);

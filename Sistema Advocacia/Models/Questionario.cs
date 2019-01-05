@@ -12,7 +12,10 @@ namespace Sistema_Advocacia.Models
         [Key]
         public int QuestionarioId { get; set; }
 
-        public int PeticaoModeloId { get; set; }
+        public int ProcessoPeticaoId { get; set; }
+
+        //public int PeticaoModeloId { get; set; }
+
 
         public string TituloTrecho { get; set; }
 
@@ -25,6 +28,8 @@ namespace Sistema_Advocacia.Models
         public DateTime DataModificacao { get; set; }
 
         public virtual PeticaoModelo PeticaoModelo { get; set; }
-        
+
+        public virtual ProcessoPeticao ProcessoPeticao { get; set; }
+
     }
 }

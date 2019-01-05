@@ -37,9 +37,16 @@
             <td>
                 @Html.DisplayFor(modelItem => processoPeticao.ProcessoId)
             </td>
-            <td>
-                @Html.ActionLink("Questionário", "Delete", new { id = processoPeticao.ProcessoPeticaoId })
-            </td>
+            @if (processoPeticao.PeticaoModelo.Peticao != null)
+            {
+                <td>
+                    @Html.ActionLink("Questionário", "Edit", "Questionario" , new { id = processoPeticao.ProcessoPeticaoId }, null)
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => processoPeticao.Comentario)
             </td>

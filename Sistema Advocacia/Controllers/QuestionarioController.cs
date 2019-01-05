@@ -15,12 +15,25 @@ namespace Sistema_Advocacia.Controllers
     {
         private DBContext db = new DBContext();
 
-        // GET: Questionario
+        // GET: Codigo original não alterado
         public ActionResult Index()
         {
             var questionarios = db.Questionarios.Include(q => q.PeticaoModelo);
             return View(questionarios.ToList());
         }
+
+        /*
+        public ActionResult ListaQuestionarioPeticao(int? processoPeticaoId)
+        {
+           var questionarios = db.Questionarios.Where(x => x.)
+
+            var questionarios = db.Questionarios.Include(q => q.PeticaoModelo);
+            return View(questionarios.ToList());
+        }
+        */
+
+
+
 
         // GET: Questionario/Details/5
         public ActionResult Details(int? id)
@@ -63,6 +76,7 @@ namespace Sistema_Advocacia.Controllers
         }
 
         // GET: Questionario/Edit/5
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,6 +91,7 @@ namespace Sistema_Advocacia.Controllers
             ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", questionario.PeticaoModeloId);
             return View(questionario);
         }
+       
 
         // POST: Questionario/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
