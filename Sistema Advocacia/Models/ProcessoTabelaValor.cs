@@ -13,6 +13,11 @@ namespace Sistema_Advocacia.Models
 
         public int ProcessoId { get; set; }
 
+        [Required]
+        [Display(Name ="Origem do Crédito")]
+        public string OrigemCredito { get; set; }
+
+        [Required]
         [DataType(DataType.Url)]
         [Display(Name ="Link Boleto")]
         public string LinkDoc { get; set; }
@@ -26,7 +31,7 @@ namespace Sistema_Advocacia.Models
         [Display(Name ="Valor Original")]
         public decimal ValorOriginal{ get; set; }
 
-
+        [Required]
         [DataType(DataType.Date)]        
         [Display(Name ="Atualizado até")]        
         public DateTime DataAtualizacao { get; set; }

@@ -6,7 +6,6 @@
 
 <h2>Edit</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -26,6 +25,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.OrigemCredito, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrigemCredito, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OrigemCredito, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.LinkDoc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LinkDoc, new { htmlAttributes = new { @class = "form-control" } })
@@ -36,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DataDebito, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DataDebito, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.DataDebito, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
                 @Html.ValidationMessageFor(model => model.DataDebito, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,7 +59,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DataAtualizacao, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DataAtualizacao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.DataAtualizacao, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
                 @Html.ValidationMessageFor(model => model.DataAtualizacao, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -76,7 +83,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

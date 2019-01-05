@@ -17,7 +17,7 @@ namespace Sistema_Advocacia.Models
 
         [Required]
         [Display(Name = "Peticao")]
-        public int PedicaoModeloId { get; set; }
+        public int PeticaoModeloId { get; set; }        
 
         [Display(Name = "Link Questionário")]
         [DataType(DataType.Url)]

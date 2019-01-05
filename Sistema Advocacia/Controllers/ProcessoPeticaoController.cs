@@ -7,7 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Sistema_Advocacia.Context;
+using Sistema_Advocacia.gerador;
 using Sistema_Advocacia.Models;
+
+
 
 namespace Sistema_Advocacia.Controllers
 {
@@ -37,19 +40,39 @@ namespace Sistema_Advocacia.Controllers
             return View(processoPeticao);
         }
 
+
         // GET: ProcessoPeticao/Create
+        /*
         public ActionResult Create()
         {
-            ViewBag.PedicaoModeloId = new SelectList(db.PeticaoModeloes, "PedicaoModeloId", "Nome");
+            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome");
             return View();
         }
+        */
+
+        public ActionResult Create(int? processoId)
+        {
+            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome");
+
+            if (processoId != null)
+            {
+                ProcessoPeticao processoPeticao = new ProcessoPeticao { ProcessoId = (int)processoId };
+                return View(processoPeticao);
+            }
+
+            return View();
+        }
+
 
         // POST: ProcessoPeticao/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProcessoPeticaoId,ProcessoId,PedicaoModeloId,LinkQuestionario,Comentario,LinkPeticao,Finalizada")] ProcessoPeticao processoPeticao)
+        public ActionResult Create([Bind(Include = "ProcessoPeticaoId,ProcessoId,PeticaoModeloId,LinkQuestionario,Comentario,LinkPeticao,Finalizada")] ProcessoPeticao processoPeticao)
         {
             if (ModelState.IsValid)
             {
@@ -57,10 +80,37 @@ namespace Sistema_Advocacia.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.PedicaoModeloId = new SelectList(db.PeticaoModeloes, "PedicaoModeloId", "Nome", processoPeticao.PedicaoModeloId);
+            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", processoPeticao.PeticaoModeloId);
             return View(processoPeticao);
         }
+        */
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ProcessoPeticaoId,ProcessoId,PeticaoModeloId,LinkQuestionario,Comentario,LinkPeticao,Finalizada")] ProcessoPeticao processoPeticao)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ProcessoPeticaos.Add(processoPeticao);
+                db.SaveChanges();
+
+
+                GerarQuestionario gerarQuestionario = new GerarQuestionario();
+                gerarQuestionario.CriarQuestionario(processoPeticao.PeticaoModeloId);
+                //CriarQuestionario(processoPeticao.ProcessoPeticaoId); //linha alterada
+
+                return RedirectToAction("Index");
+            }
+            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", processoPeticao.PeticaoModeloId);
+
+           
+            return View(processoPeticao);
+        }
+
+ 
+
+
+
 
         // GET: ProcessoPeticao/Edit/5
         public ActionResult Edit(int? id)
@@ -74,7 +124,7 @@ namespace Sistema_Advocacia.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PedicaoModeloId = new SelectList(db.PeticaoModeloes, "PedicaoModeloId", "Nome", processoPeticao.PedicaoModeloId);
+            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", processoPeticao.PeticaoModeloId);
             return View(processoPeticao);
         }
 
@@ -83,17 +133,48 @@ namespace Sistema_Advocacia.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProcessoPeticaoId,ProcessoId,PedicaoModeloId,LinkQuestionario,Comentario,LinkPeticao,Finalizada")] ProcessoPeticao processoPeticao)
+        public ActionResult Edit([Bind(Include = "ProcessoPeticaoId,ProcessoId,PeticaoModeloId,LinkQuestionario,Comentario,LinkPeticao,Finalizada")] ProcessoPeticao processoPeticao)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(processoPeticao).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("TodoProcesso", "Processo", new { id = processoPeticao.ProcessoId });
+                //return RedirectToAction("Index"); //unica linha alterada
             }
-            ViewBag.PedicaoModeloId = new SelectList(db.PeticaoModeloes, "PedicaoModeloId", "Nome", processoPeticao.PedicaoModeloId);
+            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", processoPeticao.PeticaoModeloId);
             return View(processoPeticao);
         }
+
+        /*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ProcessoTabelaValorId, ProcessoId,LinkDoc,DataDebito,ValorOriginal,DataAtualizacao,ValorAtualizado, OrigemCredito")] ProcessoTabelaValor processoTabelaValor)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(processoTabelaValor).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("TodoProcesso", "Processo", new { id = processoTabelaValor.ProcessoId });
+                //return RedirectToAction("Index"); //unica alteração
+            }
+            return View(processoTabelaValor);
+        }
+        */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: ProcessoPeticao/Delete/5
         public ActionResult Delete(int? id)

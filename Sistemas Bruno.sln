@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema Loja Hugo Comentado
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema Advocacia", "Sistema Advocacia\Sistema Advocacia.csproj", "{BBE1B9F8-EEF0-44FA-829B-651A25EF7DF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regex Extrair Perguntas Teste isolado", "Regex Extrair Perguntas Teste isolado\Regex Extrair Perguntas Teste isolado.csproj", "{0ADB0BF5-CCA3-4082-BE4D-1DF2AB34192C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BBE1B9F8-EEF0-44FA-829B-651A25EF7DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBE1B9F8-EEF0-44FA-829B-651A25EF7DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBE1B9F8-EEF0-44FA-829B-651A25EF7DF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ADB0BF5-CCA3-4082-BE4D-1DF2AB34192C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ADB0BF5-CCA3-4082-BE4D-1DF2AB34192C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ADB0BF5-CCA3-4082-BE4D-1DF2AB34192C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ADB0BF5-CCA3-4082-BE4D-1DF2AB34192C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

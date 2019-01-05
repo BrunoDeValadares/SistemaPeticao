@@ -11,112 +11,112 @@ using Sistema_Advocacia.Models;
 
 namespace Sistema_Advocacia.Controllers
 {
-    public class PeticaoModeloController : Controller
+    public class QuestionarioController : Controller
     {
         private DBContext db = new DBContext();
 
-        // GET: PeticaoModelo
+        // GET: Questionario
         public ActionResult Index()
         {
-            var peticaoModeloes = db.PeticaoModeloes.Include(p => p.NaturezaAcao);
-            return View(peticaoModeloes.ToList());
+            var questionarios = db.Questionarios.Include(q => q.PeticaoModelo);
+            return View(questionarios.ToList());
         }
 
-        // GET: PeticaoModelo/Details/5
+        // GET: Questionario/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(id);
-            if (peticaoModelo == null)
+            Questionario questionario = db.Questionarios.Find(id);
+            if (questionario == null)
             {
                 return HttpNotFound();
             }
-            return View(peticaoModelo);
+            return View(questionario);
         }
 
-        // GET: PeticaoModelo/Create
+        // GET: Questionario/Create
         public ActionResult Create()
         {
-            ViewBag.NaturezaAcaoId = new SelectList(db.NaturezaAcaos, "NaturezaAcaoID", "Nome");
+            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome");
             return View();
         }
 
-        // POST: PeticaoModelo/Create
+        // POST: Questionario/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PeticaoModeloId,Nome,NaturezaAcaoId,Peticao,Comentario")] PeticaoModelo peticaoModelo)
+        public ActionResult Create([Bind(Include = "QuestionarioId,PeticaoModeloId,TituloTrecho,Pergunta,Resposta,Exemplo,DataModificacao")] Questionario questionario)
         {
             if (ModelState.IsValid)
             {
-                db.PeticaoModeloes.Add(peticaoModelo);
+                db.Questionarios.Add(questionario);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.NaturezaAcaoId = new SelectList(db.NaturezaAcaos, "NaturezaAcaoID", "Nome", peticaoModelo.NaturezaAcaoId);
-            return View(peticaoModelo);
+            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", questionario.PeticaoModeloId);
+            return View(questionario);
         }
 
-        // GET: PeticaoModelo/Edit/5
+        // GET: Questionario/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(id);
-            if (peticaoModelo == null)
+            Questionario questionario = db.Questionarios.Find(id);
+            if (questionario == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.NaturezaAcaoId = new SelectList(db.NaturezaAcaos, "NaturezaAcaoID", "Nome", peticaoModelo.NaturezaAcaoId);
-            return View(peticaoModelo);
+            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", questionario.PeticaoModeloId);
+            return View(questionario);
         }
 
-        // POST: PeticaoModelo/Edit/5
+        // POST: Questionario/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PeticaoModeloId,Nome,NaturezaAcaoId,Peticao,Comentario")] PeticaoModelo peticaoModelo)
+        public ActionResult Edit([Bind(Include = "QuestionarioId,PeticaoModeloId,TituloTrecho,Pergunta,Resposta,Exemplo,DataModificacao")] Questionario questionario)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(peticaoModelo).State = EntityState.Modified;
+                db.Entry(questionario).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.NaturezaAcaoId = new SelectList(db.NaturezaAcaos, "NaturezaAcaoID", "Nome", peticaoModelo.NaturezaAcaoId);
-            return View(peticaoModelo);
+            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", questionario.PeticaoModeloId);
+            return View(questionario);
         }
 
-        // GET: PeticaoModelo/Delete/5
+        // GET: Questionario/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(id);
-            if (peticaoModelo == null)
+            Questionario questionario = db.Questionarios.Find(id);
+            if (questionario == null)
             {
                 return HttpNotFound();
             }
-            return View(peticaoModelo);
+            return View(questionario);
         }
 
-        // POST: PeticaoModelo/Delete/5
+        // POST: Questionario/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(id);
-            db.PeticaoModeloes.Remove(peticaoModelo);
+            Questionario questionario = db.Questionarios.Find(id);
+            db.Questionarios.Remove(questionario);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

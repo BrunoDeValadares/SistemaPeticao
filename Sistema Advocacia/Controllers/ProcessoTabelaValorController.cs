@@ -53,7 +53,7 @@ namespace Sistema_Advocacia.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProcessoTabelaValorId,ProcessoId,LinkDoc,DataDebito,ValorOriginal,DataAtualizacao,ValorAtualizado")] ProcessoTabelaValor processoTabelaValor)
+        public ActionResult Create([Bind(Include = "ProcessoTabelaValorId, ProcessoId,LinkDoc,DataDebito,ValorOriginal,DataAtualizacao,ValorAtualizado, OrigemCredito")] ProcessoTabelaValor processoTabelaValor)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace Sistema_Advocacia.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProcessoTabelaValorId,ProcessoId,LinkDoc,DataDebito,ValorOriginal,DataAtualizacao,ValorAtualizado")] ProcessoTabelaValor processoTabelaValor)
+        public ActionResult Edit([Bind(Include = "ProcessoTabelaValorId, ProcessoId,LinkDoc,DataDebito,ValorOriginal,DataAtualizacao,ValorAtualizado, OrigemCredito")] ProcessoTabelaValor processoTabelaValor)
         {
             if (ModelState.IsValid)
             {

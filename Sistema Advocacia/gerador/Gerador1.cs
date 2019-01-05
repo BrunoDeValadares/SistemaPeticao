@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Sistema_Advocacia.Gerador
 {
-    public class Gerador
+    public class Gerador1
     {
         List<TrechoPeticao> trechos = new List<TrechoPeticao>();
         /*

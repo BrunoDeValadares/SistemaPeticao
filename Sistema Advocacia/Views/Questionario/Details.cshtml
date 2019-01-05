@@ -1,0 +1,66 @@
+﻿@model Sistema_Advocacia.Models.Questionario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Questionario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PeticaoModelo.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PeticaoModelo.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TituloTrecho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TituloTrecho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pergunta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pergunta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resposta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resposta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Exemplo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Exemplo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataModificacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataModificacao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionarioId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

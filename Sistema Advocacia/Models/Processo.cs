@@ -26,9 +26,10 @@ namespace Sistema_Advocacia.Models
         [Display(Name ="Resumo do Caso")]
         [DataType(DataType.MultilineText)]
         public string ResumoDoCaso { get; set; }
-
-        [Display(Name ="Num. Processo")]
-        public int NumeroProcesso { get; set; }
+        
+        [Display(Name ="Numero do Processo")]
+        public int? NumeroProcesso { get; set; }
+        
 
         [Display(Name ="Link Processo")]
         [DataType(DataType.Url)]

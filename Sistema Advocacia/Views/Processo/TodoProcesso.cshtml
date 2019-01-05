@@ -9,6 +9,8 @@
 
 <h3>Petições</h3>
 
+@Html.ActionLink("Novo", "Create", "ProcessoPeticao", new { processoId = Model.Processo.ProcessoId }, null)
+@Html.ActionLink("NovoNovo", "Create", "ProcessoPeticao")
 <table class="table">
     <tr>
         <th>Petição</th>
@@ -49,6 +51,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = processoPeticao.ProcessoPeticaoId }) |
+                @Html.ActionLink("Editar", "Edit", "ProcessoPeticao", new { id = Model.Processo.ProcessoId }, null) |
                 @Html.ActionLink("Details", "Details", new { id = processoPeticao.ProcessoPeticaoId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = processoPeticao.ProcessoPeticaoId })
 
