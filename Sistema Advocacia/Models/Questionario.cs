@@ -27,7 +27,7 @@ namespace Sistema_Advocacia.Models
         
         public DateTime DataModificacao { get; set; }
 
-        public virtual PeticaoModelo PeticaoModelo { get; set; }
+        //public virtual PeticaoModelo PeticaoModelo { get; set; }
 
         public virtual ProcessoPeticao ProcessoPeticao { get; set; }
 

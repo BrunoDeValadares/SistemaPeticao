@@ -96,7 +96,8 @@ namespace Sistema_Advocacia.Controllers
 
 
                 GerarQuestionario gerarQuestionario = new GerarQuestionario();
-                gerarQuestionario.CriarQuestionario(processoPeticao.PeticaoModeloId);
+                gerarQuestionario.CriarQuestionario(processoPeticao.ProcessoPeticaoId);
+                //gerarQuestionario.CriarQuestionario(processoPeticao.PeticaoModeloId);
                 //CriarQuestionario(processoPeticao.ProcessoPeticaoId); //linha alterada
 
                 return RedirectToAction("Index");

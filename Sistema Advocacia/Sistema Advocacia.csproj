@@ -280,16 +280,16 @@
     <Content Include="Views\PeticaoModelo\Details.cshtml" />
     <Content Include="Views\PeticaoModelo\Edit.cshtml" />
     <Content Include="Views\PeticaoModelo\Index.cshtml" />
-    <Content Include="Views\Questionario\Create.cshtml" />
-    <Content Include="Views\Questionario\Delete.cshtml" />
-    <Content Include="Views\Questionario\Details.cshtml" />
-    <Content Include="Views\Questionario\Edit.cshtml" />
-    <Content Include="Views\Questionario\Index.cshtml" />
     <Content Include="Views\ProcessoPeticao\Create.cshtml" />
     <Content Include="Views\ProcessoPeticao\Delete.cshtml" />
     <Content Include="Views\ProcessoPeticao\Details.cshtml" />
     <Content Include="Views\ProcessoPeticao\Edit.cshtml" />
     <Content Include="Views\ProcessoPeticao\Index.cshtml" />
+    <Content Include="Views\Questionario\Create.cshtml" />
+    <Content Include="Views\Questionario\Delete.cshtml" />
+    <Content Include="Views\Questionario\Details.cshtml" />
+    <Content Include="Views\Questionario\Edit.cshtml" />
+    <Content Include="Views\Questionario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

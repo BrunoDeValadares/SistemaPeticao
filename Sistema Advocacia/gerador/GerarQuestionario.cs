@@ -42,8 +42,7 @@ namespace Sistema_Advocacia.gerador
             foreach (var pergunta in perguntas)
             {
                 db.Questionarios.Add(new Questionario
-                {
-                    PeticaoModeloId = processoPeticao.PeticaoModeloId,
+                {                    
                     ProcessoPeticaoId = processoPeticao.ProcessoPeticaoId,
                     TituloTrecho = pergunta.TituloTrecho,
                     Pergunta = pergunta.pergunta,
@@ -74,7 +73,7 @@ namespace Sistema_Advocacia.gerador
             {
                 db.Questionarios.Add(new Questionario
                 {                    
-                    PeticaoModeloId = peticaoModeloId,
+                    //PeticaoModeloId = peticaoModeloId,
                     TituloTrecho = pergunta.TituloTrecho,
                     Pergunta = pergunta.pergunta,
                     DataModificacao = DateTime.Today
@@ -102,7 +101,7 @@ namespace Sistema_Advocacia.gerador
             {
                 db.Questionarios.Add(new Questionario
                 {
-                    PeticaoModeloId = processoPeticao.PeticaoModeloId,
+                    //PeticaoModeloId = processoPeticao.PeticaoModeloId,
                     TituloTrecho = pergunta.TituloTrecho,
                     Pergunta = pergunta.pergunta,
                     DataModificacao = DateTime.Today

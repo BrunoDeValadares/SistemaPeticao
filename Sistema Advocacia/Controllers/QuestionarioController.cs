@@ -15,24 +15,31 @@ namespace Sistema_Advocacia.Controllers
     {
         private DBContext db = new DBContext();
 
-        // GET: Codigo original não alterado
-        public ActionResult Index()
+
+        // GET: Questionario
+        //lista de questionário de uma ProcessoPeticao
+        public ActionResult Index(int? processoPeticaoId)
         {
-            var questionarios = db.Questionarios.Include(q => q.PeticaoModelo);
+            List<Questionario> questionarios = new List<Questionario>();
+            if (processoPeticaoId != null)
+            {
+                questionarios = db.Questionarios.Where(x => x.ProcessoPeticaoId == processoPeticaoId).ToList();
+                return View(questionarios.ToList());
+            }
+            questionarios = db.Questionarios.Include(q => q.ProcessoPeticao).ToList();
             return View(questionarios.ToList());
         }
 
-        /*
-        public ActionResult ListaQuestionarioPeticao(int? processoPeticaoId)
-        {
-           var questionarios = db.Questionarios.Where(x => x.)
 
-            var questionarios = db.Questionarios.Include(q => q.PeticaoModelo);
+
+        /*
+        // GET: Questionario                                //TEXTO ORIGINAL
+        public ActionResult Index()
+        {
+            var questionarios = db.Questionarios.Include(q => q.ProcessoPeticao);
             return View(questionarios.ToList());
         }
         */
-
-
 
 
         // GET: Questionario/Details/5
@@ -50,19 +57,28 @@ namespace Sistema_Advocacia.Controllers
             return View(questionario);
         }
 
+
+
+
+
+                                                       
         // GET: Questionario/Create
         public ActionResult Create()
         {
-            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome");
+            ViewBag.ProcessoPeticaoId = new SelectList(db.ProcessoPeticaos, "ProcessoPeticaoId", "LinkQuestionario");
             return View();
         }
 
         // POST: Questionario/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "QuestionarioId,PeticaoModeloId,TituloTrecho,Pergunta,Resposta,Exemplo,DataModificacao")] Questionario questionario)
+        public ActionResult Create([Bind(Include = "QuestionarioId,ProcessoPeticaoId,TituloTrecho,Pergunta,Resposta,Exemplo,DataModificacao")] Questionario questionario)
         {
             if (ModelState.IsValid)
             {
@@ -71,12 +87,11 @@ namespace Sistema_Advocacia.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", questionario.PeticaoModeloId);
+            ViewBag.ProcessoPeticaoId = new SelectList(db.ProcessoPeticaos, "ProcessoPeticaoId", "LinkQuestionario", questionario.ProcessoPeticaoId);
             return View(questionario);
         }
 
         // GET: Questionario/Edit/5
-        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,17 +103,16 @@ namespace Sistema_Advocacia.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", questionario.PeticaoModeloId);
+            ViewBag.ProcessoPeticaoId = new SelectList(db.ProcessoPeticaos, "ProcessoPeticaoId", "LinkQuestionario", questionario.ProcessoPeticaoId);
             return View(questionario);
         }
-       
 
         // POST: Questionario/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "QuestionarioId,PeticaoModeloId,TituloTrecho,Pergunta,Resposta,Exemplo,DataModificacao")] Questionario questionario)
+        public ActionResult Edit([Bind(Include = "QuestionarioId,ProcessoPeticaoId,TituloTrecho,Pergunta,Resposta,Exemplo,DataModificacao")] Questionario questionario)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +120,7 @@ namespace Sistema_Advocacia.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", questionario.PeticaoModeloId);
+            ViewBag.ProcessoPeticaoId = new SelectList(db.ProcessoPeticaos, "ProcessoPeticaoId", "LinkQuestionario", questionario.ProcessoPeticaoId);
             return View(questionario);
         }
 
