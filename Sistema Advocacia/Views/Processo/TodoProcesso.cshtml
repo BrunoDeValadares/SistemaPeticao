@@ -10,7 +10,7 @@
 <h3>Petições</h3>
 
 @Html.ActionLink("Novo", "Create", "ProcessoPeticao", new { processoId = Model.Processo.ProcessoId }, null)
-@Html.ActionLink("NovoNovo", "Create", "ProcessoPeticao")
+
 <table class="table">
     <tr>
         <th>Petição</th>
@@ -40,7 +40,7 @@
             @if (processoPeticao.PeticaoModelo.Peticao != null)
             {
                 <td>
-                    @Html.ActionLink("Questionário", "Index", "Questionario" , new { id = processoPeticao.ProcessoPeticaoId }, null)
+                    @Html.ActionLink("Questionário", "Index", "Questionario", new { processoPeticaoId = processoPeticao.ProcessoPeticaoId }, null)
                 </td>
             }
             else
@@ -57,11 +57,9 @@
                 @Html.DisplayFor(modelItem => processoPeticao.Finalizada)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = processoPeticao.ProcessoPeticaoId }) |
-                @Html.ActionLink("Editar", "Edit", "ProcessoPeticao", new { id = Model.Processo.ProcessoId }, null) |
-                @Html.ActionLink("Details", "Details", new { id = processoPeticao.ProcessoPeticaoId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = processoPeticao.ProcessoPeticaoId })
-
+                @Html.ActionLink("Editar", "Edit", "ProcessoPeticao", new { id = processoPeticao.ProcessoPeticaoId }, null) |
+                @Html.ActionLink("Detalhes", "Details", "ProcessoPeticao", new { id = processoPeticao.ProcessoPeticaoId }, null) |
+                @Html.ActionLink("Deletar", "Delete", "ProcessoPeticao", new { id = processoPeticao.ProcessoPeticaoId }, null) |
             </td>
         </tr>
     }
@@ -106,9 +104,9 @@
                 @Html.DisplayFor(modelItem => item.Link)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProcessoDocumentoId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProcessoDocumentoId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProcessoDocumentoId })
+                @Html.ActionLink("Editar", "Edit", "ProcessoDocumento", new { id = item.ProcessoDocumentoId }, null) |
+                @Html.ActionLink("Detalhes", "Details", "ProcessoDocumento", new { id = item.ProcessoDocumentoId }, null) |
+                @Html.ActionLink("Deletar", "Delete", "ProcessoDocumento", new { id = item.ProcessoDocumentoId }, null)
             </td>
         </tr>
     }
@@ -158,12 +156,9 @@
                 @Html.DisplayFor(modelItem => item.ValorAtualizado)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProcessoTabelaValorId }) |
-                @Html.ActionLink("Editar", "Edit", "ProcessoTabelaValor", new { id = Model.Processo.ProcessoId }, null)
-                @Html.ActionLink("Details", "Details", new { id = item.ProcessoTabelaValorId })
-                @Html.ActionLink("Detalhes", "Details", "ProcessoTabelaValor", new { id = Model.Processo.ProcessoId }, null)|
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProcessoTabelaValorId })
-                @Html.ActionLink("Deletar", "Delete", "ProcessoTabelaValor", new { id = Model.Processo.ProcessoId }, null)
+                @Html.ActionLink("Editar", "Edit", "ProcessoTabelaValor", new { id = item.ProcessoTabelaValorId }, null) |
+                @Html.ActionLink("Detalhes", "Details", "ProcessoTabelaValor", new { id = item.ProcessoTabelaValorId }, null) |
+                @Html.ActionLink("Deletar", "Delete", "ProcessoTabelaValor", new { id = item.ProcessoTabelaValorId }, null)
             </td>
         </tr>
     }

@@ -290,6 +290,8 @@
     <Content Include="Views\Questionario\Details.cshtml" />
     <Content Include="Views\Questionario\Edit.cshtml" />
     <Content Include="Views\Questionario\Index.cshtml" />
+    <Content Include="Views\Questionario\IndexTeste.cshtml" />
+    <Content Include="Views\Questionario\CreateTeste.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

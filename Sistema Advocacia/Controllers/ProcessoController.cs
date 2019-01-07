@@ -29,7 +29,7 @@ namespace Sistema_Advocacia.Controllers
 
             todoProcesso.Processo = db.Processoes.Find(id);
             todoProcesso.ProcessoPeticoes = db.ProcessoPeticaos.Where(x => x.ProcessoId == id).Include(x => x.PeticaoModelo).ToList();
-            todoProcesso.ProcessoDocumentos = db.ProcessoDocumentoes.Where(x => x.ProcessoDocumentoId == id).Include(x => x.Documento).ToList();
+            todoProcesso.ProcessoDocumentos = db.ProcessoDocumentoes.Where(x => x.ProcessoId == id).Include(x => x.Documento).ToList();
             todoProcesso.ProcessoTabelaValores = db.ProcessoTabelaValors.Where(x => x.ProcessoId == id).ToList();
 
             return View(todoProcesso); 

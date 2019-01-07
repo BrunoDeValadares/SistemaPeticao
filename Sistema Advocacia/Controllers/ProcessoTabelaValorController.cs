@@ -124,7 +124,8 @@ namespace Sistema_Advocacia.Controllers
             ProcessoTabelaValor processoTabelaValor = db.ProcessoTabelaValors.Find(id);
             db.ProcessoTabelaValors.Remove(processoTabelaValor);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index"); //ALTERADO
+            return RedirectToAction("TodoProcesso", "Processo", new { id = processoTabelaValor.ProcessoId });
         }
 
         protected override void Dispose(bool disposing)

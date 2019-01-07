@@ -37,7 +37,8 @@ namespace Sistema_Advocacia.Controllers
             {
                 return HttpNotFound();
             }
-            return View(processoPeticao);
+            return View(processoPeticao); 
+            //return RedirectToAction("TodoProcesso", "Processo", new { id = processoPeticao.ProcessoId });
         }
 
 
@@ -56,8 +57,9 @@ namespace Sistema_Advocacia.Controllers
 
             if (processoId != null)
             {
-                ProcessoPeticao processoPeticao = new ProcessoPeticao { ProcessoId = (int)processoId };
-                return View(processoPeticao);
+                ProcessoPeticao processoPeticao = new ProcessoPeticao { ProcessoId = (int)processoId };                
+                //return RedirectToAction("TodoProcesso", "Processo", new { id = processoPeticao.ProcessoId }); //APAGAR LIXO
+                return View(processoPeticao);  //APAGAR LIXO
             }
 
             return View();
@@ -69,7 +71,7 @@ namespace Sistema_Advocacia.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 
 
-        /*
+        /*                                             \\TEXTO ORIGINAL
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProcessoPeticaoId,ProcessoId,PeticaoModeloId,LinkQuestionario,Comentario,LinkPeticao,Finalizada")] ProcessoPeticao processoPeticao)
@@ -99,8 +101,8 @@ namespace Sistema_Advocacia.Controllers
                 gerarQuestionario.CriarQuestionario(processoPeticao.ProcessoPeticaoId);
                 //gerarQuestionario.CriarQuestionario(processoPeticao.PeticaoModeloId);
                 //CriarQuestionario(processoPeticao.ProcessoPeticaoId); //linha alterada
-
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("TodoProcesso", "Processo", new { id = processoPeticao.ProcessoId });
             }
             ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", processoPeticao.PeticaoModeloId);
 
@@ -166,17 +168,6 @@ namespace Sistema_Advocacia.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
         // GET: ProcessoPeticao/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -200,7 +191,8 @@ namespace Sistema_Advocacia.Controllers
             ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(id);
             db.ProcessoPeticaos.Remove(processoPeticao);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return RedirectToAction("TodoProcesso", "Processo", new { id = processoPeticao.ProcessoId });
         }
 
         protected override void Dispose(bool disposing)

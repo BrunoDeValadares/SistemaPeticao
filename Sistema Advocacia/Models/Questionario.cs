@@ -12,11 +12,13 @@ namespace Sistema_Advocacia.Models
         [Key]
         public int QuestionarioId { get; set; }
 
+        //[Display(AutoGenerateField = false)]        
+        //[ScaffoldColumn(false)]
         public int ProcessoPeticaoId { get; set; }
 
         //public int PeticaoModeloId { get; set; }
 
-
+        [Display(Name ="Trecho")]            
         public string TituloTrecho { get; set; }
 
         public string Pergunta { get; set; }

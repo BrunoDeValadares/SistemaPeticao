@@ -1,10 +1,10 @@
 ﻿@model Sistema_Advocacia.Models.Questionario
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "CreateTeste";
 }
 
-<h2>Create</h2>
+<h2>CreateTeste</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -14,6 +14,14 @@
         <h4>Questionario</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProcessoPeticaoId, "ProcessoPeticaoId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProcessoPeticaoId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProcessoPeticaoId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.TituloTrecho, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

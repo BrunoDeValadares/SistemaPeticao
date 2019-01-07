@@ -11,9 +11,9 @@ namespace Sistema_Advocacia.Models
         [Key]
         public int ProcessoPeticaoId { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Processo")]
-        public int ProcessoId { get; set; }
+        public int? ProcessoId { get; set; }
 
         [Required]
         [Display(Name = "Peticao")]
@@ -35,5 +35,6 @@ namespace Sistema_Advocacia.Models
         public bool Finalizada { get; set; }
 
         public virtual PeticaoModelo PeticaoModelo { get; set; }
+        //public virtual Processo Processo{ get; set; }
     }
 }

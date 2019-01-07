@@ -76,7 +76,8 @@ namespace Sistema_Advocacia.Controllers
             {
                 db.ProcessoDocumentoes.Add(processoDocumento);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("TodoProcesso", "Processo", new { id = processoDocumento.ProcessoId });
             }
 
             ViewBag.DocumentoId = new SelectList(db.Documentoes, "DocumentoId", "Nome", processoDocumento.DocumentoId);
@@ -112,7 +113,8 @@ namespace Sistema_Advocacia.Controllers
             {
                 db.Entry(processoDocumento).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("TodoProcesso", "Processo", new { id = processoDocumento.ProcessoId });
             }
             ViewBag.DocumentoId = new SelectList(db.Documentoes, "DocumentoId", "Nome", processoDocumento.DocumentoId);
             ViewBag.ProcessoId = new SelectList(db.Processoes, "ProcessoId", "Comentario", processoDocumento.ProcessoId);
@@ -142,7 +144,8 @@ namespace Sistema_Advocacia.Controllers
             ProcessoDocumento processoDocumento = db.ProcessoDocumentoes.Find(id);
             db.ProcessoDocumentoes.Remove(processoDocumento);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return RedirectToAction("TodoProcesso", "Processo", new { id = processoDocumento.ProcessoId });
         }
 
         protected override void Dispose(bool disposing)

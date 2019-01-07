@@ -63,4 +63,5 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProcessoPeticaoId }) |
     @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })
 </p>

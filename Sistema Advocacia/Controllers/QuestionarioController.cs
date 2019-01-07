@@ -30,6 +30,22 @@ namespace Sistema_Advocacia.Controllers
             return View(questionarios.ToList());
         }
 
+        //LIXO
+        public ActionResult IndexTeste()
+        {
+            var questionarios = db.Questionarios.Include(q => q.ProcessoPeticao);
+            return View(questionarios.ToList());          
+
+        }
+
+        // GET: Questionario/Create //LIXO
+        public ActionResult CreateTeste()
+        {            
+            return View();
+        }
+
+
+
 
 
         /*
@@ -118,11 +134,23 @@ namespace Sistema_Advocacia.Controllers
             {
                 db.Entry(questionario).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index"); //APAGAR LIXO
+
+                return RedirectToAction("Index", "Questionario", new { processoPeticaoId = questionario.ProcessoPeticaoId}); 
+                //return View()
             }
             ViewBag.ProcessoPeticaoId = new SelectList(db.ProcessoPeticaos, "ProcessoPeticaoId", "LinkQuestionario", questionario.ProcessoPeticaoId);
             return View(questionario);
         }
+
+        /*
+        public ActionResult Voltar(int? processoId)
+        {
+            var processoId = int.Parse(Request["TipoRecebimento"]);
+
+            return
+        }
+        */
 
         // GET: Questionario/Delete/5
         public ActionResult Delete(int? id)
