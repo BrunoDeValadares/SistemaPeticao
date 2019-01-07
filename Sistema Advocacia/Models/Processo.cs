@@ -37,6 +37,11 @@ namespace Sistema_Advocacia.Models
 
         public string Vara { get; set; }
 
+        /*
+        [DataType(DataType.DateTime)]
+        public DateTime DataCadastro { get; set; }
+        */
+
         public virtual Cliente Cliente{ get; set; }
 
         public virtual NaturezaAcao NaturezaAcao { get; set; }

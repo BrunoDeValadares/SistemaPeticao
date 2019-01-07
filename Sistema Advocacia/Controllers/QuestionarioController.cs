@@ -23,7 +23,16 @@ namespace Sistema_Advocacia.Controllers
             List<Questionario> questionarios = new List<Questionario>();
             if (processoPeticaoId != null)
             {
+                var itemProcessoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);
+                ViewBag.Peticao = itemProcessoPeticao.PeticaoModelo.Nome;
+                ViewBag.Cliente = itemProcessoPeticao.Processo.Cliente.Nome;
                 questionarios = db.Questionarios.Where(x => x.ProcessoPeticaoId == processoPeticaoId).ToList();
+                /*
+                questionarios = db.Questionarios.
+                    Where(x => x.ProcessoPeticaoId == processoPeticaoId).
+                    Include(x => x.ProcessoPeticao).Include(x => x.ProcessoPeticao.PeticaoModelo).ToList();     
+                */
+
                 return View(questionarios.ToList());
             }
             questionarios = db.Questionarios.Include(q => q.ProcessoPeticao).ToList();

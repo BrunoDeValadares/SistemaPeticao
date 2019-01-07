@@ -34,7 +34,20 @@ namespace Sistema_Advocacia.Models
         [Display(Name = "Finalizada?")]
         public bool Finalizada { get; set; }
 
+        [Display(Name = "Data Cadastro")]
+        //[]
+        [DataType(DataType.Date)]
+        public DateTime? DataCadastro { get; set; }
+
+        [Display(Name = "Data Finalização")]
+        [DataType(DataType.Date)]
+        public DateTime? DataFinalizacao { get; set; }
+
+        [Display(Name = "Data Protocolização")]
+        [DataType(DataType.Date)]
+        public DateTime? DataProtocolizacao { get; set; }
+
         public virtual PeticaoModelo PeticaoModelo { get; set; }
-        //public virtual Processo Processo{ get; set; }
+        public virtual Processo Processo{ get; set; }
     }
 }

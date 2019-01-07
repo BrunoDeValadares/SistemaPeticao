@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace Sistema_Advocacia.Models
@@ -28,8 +29,6 @@ namespace Sistema_Advocacia.Models
     {
         [Key]
         public int ClienteId { get; set; }
-
-
 
         public string CPF { get; set; }
 
@@ -95,7 +94,7 @@ namespace Sistema_Advocacia.Models
             get
             {
                 string logradouro = string.Format("residente e domiciliado à {0},", Logradouro);
-                string numero = string.Format("nº {0},", Numero);                
+                string numero = string.Format("nº {0},", Numero);
                 string setor = string.Format("Setor {0},", Setor);
 
                 string endereco = string.Format("{0} {1} {2} {3}-{4}", logradouro, numero, setor, Cidade, Estado);
@@ -115,6 +114,20 @@ namespace Sistema_Advocacia.Models
                 return string.Format("{0}, {1}, {2}, {3}, {4}, {5}", Nome, Nacionalidade, EstadoCivil, cpf, rg, Endereco_);
             }
         }
+
+
+
+        public string PrimeiroNome
+        {
+            get
+            {
+                Regex regex = new Regex(@"[\w]*");
+                string PrimeiroNome = regex.Match(Nome).Value;
+                return PrimeiroNome;
+            }
+
+        }
+
 
 
     }

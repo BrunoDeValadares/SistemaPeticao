@@ -57,7 +57,7 @@ namespace Sistema_Advocacia.Controllers
 
             if (processoId != null)
             {
-                ProcessoPeticao processoPeticao = new ProcessoPeticao { ProcessoId = (int)processoId };                
+                ProcessoPeticao processoPeticao = new ProcessoPeticao { ProcessoId = (int)processoId, DataCadastro =  DateTime.Today};                
                 //return RedirectToAction("TodoProcesso", "Processo", new { id = processoPeticao.ProcessoId }); //APAGAR LIXO
                 return View(processoPeticao);  //APAGAR LIXO
             }
@@ -89,10 +89,11 @@ namespace Sistema_Advocacia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProcessoPeticaoId,ProcessoId,PeticaoModeloId,LinkQuestionario,Comentario,LinkPeticao,Finalizada")] ProcessoPeticao processoPeticao)
+        public ActionResult Create([Bind(Include = "ProcessoPeticaoId,ProcessoId,PeticaoModeloId,LinkQuestionario,Comentario,LinkPeticao,Finalizada, DataCadastro")] ProcessoPeticao processoPeticao)
         {
             if (ModelState.IsValid)
             {
+
                 db.ProcessoPeticaos.Add(processoPeticao);
                 db.SaveChanges();
 
@@ -136,7 +137,7 @@ namespace Sistema_Advocacia.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProcessoPeticaoId,ProcessoId,PeticaoModeloId,LinkQuestionario,Comentario,LinkPeticao,Finalizada")] ProcessoPeticao processoPeticao)
+        public ActionResult Edit([Bind(Include = "ProcessoPeticaoId,ProcessoId,PeticaoModeloId,LinkQuestionario,Comentario,LinkPeticao,Finalizada, DataCadastro, DataFinalizacao, DataProtocolizacao")] ProcessoPeticao processoPeticao)
         {
             if (ModelState.IsValid)
             {
