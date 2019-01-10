@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Sistema_Advocacia.Models.Questionario>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista";
 }
 
 @{string Cliente = Model.First().ProcessoPeticao.Processo.Cliente.Nome;}
@@ -40,9 +40,9 @@
                 @Html.DisplayFor(modelItem => item.Resposta)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.QuestionarioId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.QuestionarioId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.QuestionarioId })
+                @Html.ActionLink("Editar", "Edit", new { id = item.QuestionarioId }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.QuestionarioId }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.QuestionarioId })
 
 
             </td>

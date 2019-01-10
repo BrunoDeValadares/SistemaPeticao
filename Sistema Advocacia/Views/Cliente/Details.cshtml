@@ -1,10 +1,10 @@
 ﻿@model Sistema_Advocacia.Models.Cliente
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes";
 }
 
-<h2>Details</h2>
+<h2>Detalhes</h2>
 
 <div>
     <h4>Cliente</h4>
@@ -32,14 +32,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.RG)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sobrenome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sobrenome)
         </dd>
 
         <dt>
@@ -81,15 +73,6 @@
         <dd>
             @Html.DisplayFor(model => model.Telefone)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Endereco)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Endereco)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Logradouro)
         </dt>
@@ -157,6 +140,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ClienteId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ClienteId }) |
+    @Html.ActionLink("Voltar", "Index")
 </p>

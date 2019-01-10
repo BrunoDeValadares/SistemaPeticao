@@ -1,103 +1,97 @@
 ﻿@model Sistema_Advocacia.Models.ProcessoPeticao
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar";
 }
 
-<h2>Edit</h2>
+<h2>Editar</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>ProcessoPeticao</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ProcessoPeticaoId)
+<div class="form-horizontal">
+    <h4>Petição do Processo</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ProcessoPeticaoId)
+    @Html.HiddenFor(model => model.ProcessoId)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProcessoId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProcessoId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProcessoId, "", new { @class = "text-danger" })
-            </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PeticaoModeloId, "Tipo de Peticao", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("PeticaoModeloId", null, "selecione um registro", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PeticaoModeloId, "", new { @class = "text-danger" })
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PeticaoModeloId, "PeticaoModeloId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PeticaoModeloId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PeticaoModeloId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LinkPeticao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LinkPeticao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LinkPeticao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DataCadastro, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
-                @Html.ValidationMessageFor(model => model.DataCadastro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DataFinalizacao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DataFinalizacao, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
-                @Html.ValidationMessageFor(model => model.DataFinalizacao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DataProtocolizacao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DataProtocolizacao, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
-                @Html.ValidationMessageFor(model => model.DataCadastro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Finalizada, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Finalizada)
-                    @Html.ValidationMessageFor(model => model.Finalizada, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-
-
-
     </div>
 
 
     <div class="form-group">
+        @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LinkPeticao, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LinkPeticao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LinkPeticao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.DataCadastro, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(model => model.DataCadastro, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DataFinalizacao, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.DataFinalizacao, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(model => model.DataFinalizacao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DataProtocolizacao, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.DataProtocolizacao, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(model => model.DataCadastro, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Finalizada, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Finalizada)
+                @Html.ValidationMessageFor(model => model.Finalizada, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Salvar" class="btn btn-default" />
         </div>
     </div>
 
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })
+    </div>

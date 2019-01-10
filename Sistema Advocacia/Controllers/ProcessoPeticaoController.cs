@@ -97,7 +97,6 @@ namespace Sistema_Advocacia.Controllers
                 db.ProcessoPeticaos.Add(processoPeticao);
                 db.SaveChanges();
 
-
                 GerarQuestionario gerarQuestionario = new GerarQuestionario();
                 gerarQuestionario.CriarQuestionario(processoPeticao.ProcessoPeticaoId);
                 //gerarQuestionario.CriarQuestionario(processoPeticao.PeticaoModeloId);
@@ -106,7 +105,6 @@ namespace Sistema_Advocacia.Controllers
                 return RedirectToAction("TodoProcesso", "Processo", new { id = processoPeticao.ProcessoId });
             }
             ViewBag.PeticaoModeloId = new SelectList(db.PeticaoModeloes, "PeticaoModeloId", "Nome", processoPeticao.PeticaoModeloId);
-
            
             return View(processoPeticao);
         }

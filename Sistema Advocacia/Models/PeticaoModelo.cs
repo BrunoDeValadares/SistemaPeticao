@@ -31,15 +31,26 @@ namespace Sistema_Advocacia.Models
         */
 
         [Required]
-        public string Nome { get; set; }        
+        public string Nome { get; set; }
 
+        [Required]
         [Display(Name ="Natureza da ação")]
-        [Required(ErrorMessage = "Digite um valor para o campo {0}!")]
+        //[Required(ErrorMessage = "Digite um valor para o campo {0}!")]
         public int NaturezaAcaoId { get; set; }
 
+        [Required]
+        [Display(Name = "Petição Original")]
+        [DataType(DataType.MultilineText)]
+        public string PeticaoOriginal { get; set; }
+
+
+        
+        [Required]
         [Display(Name = "Petição")]
         [DataType(DataType.MultilineText)]       
         public string Peticao { get; set; }        
+
+
 
         [Display(Name = "Comentários")]
         [DataType(DataType.MultilineText)]

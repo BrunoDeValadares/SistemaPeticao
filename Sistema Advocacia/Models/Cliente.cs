@@ -13,9 +13,12 @@ namespace Sistema_Advocacia.Models
         casado = 1,
         casada = 2,
         solteiro = 3,
-        soleteira = 4,
+        solteira = 4,
         viúvo = 5,
-        viúva = 6
+        viúva = 6,
+        divorciado = 7,
+        divorciada = 8
+    
     }
 
     public enum Sexo
@@ -30,30 +33,37 @@ namespace Sistema_Advocacia.Models
         [Key]
         public int ClienteId { get; set; }
 
+
         public string CPF { get; set; }
 
+        ///[Required]
         public string RG { get; set; }
 
         [Display(Name = "Nome")]
         [Required]
         public string Nome { get; set; }
 
+        ///[Required]
         public string Nacionalidade { get; set; }
 
+        ///[Required]
         [Range(1, int.MaxValue, ErrorMessage = "Selecione um registro")]
         [Display(Name = "Estado Civil")]
         public EstadoCivil EstadoCivil { get; set; }
 
+        ///[Required]
         [Display(Name = "Data de Nascimento")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime Nascimento { get; set; }
 
+        ///[Required]
         public Sexo Sexo { get; set; }
 
         [Display(Name = "Telefone")]
         public string Telefone { get; set; }
 
+        ///[Required]
         public string Logradouro { get; set; }
 
         [Display(Name = "Número")]
@@ -63,13 +73,15 @@ namespace Sistema_Advocacia.Models
 
         public string Complemento { get; set; }
 
+        ///[Required]
         public string Cidade { get; set; }
 
+        ///[Required]
         public string Estado { get; set; }
 
 
         [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage  = "Digite um email válido!" )]
         public string Email { get; set; }
 
         //public string NomeCompleto { get { return string.Format("{0} {1}", Nome, Sobrenome); } }

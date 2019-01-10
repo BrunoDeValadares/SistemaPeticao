@@ -4,13 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista de Processos</h2>
 
 
 
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -71,10 +71,10 @@
                 @Html.DisplayFor(modelItem => item.Vara)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProcessoId })|
-                @Html.ActionLink("Details", "Details", new { id = item.ProcessoId })| 
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProcessoId })|               
-                @Html.ActionLink("Docs", "TodoProcesso", new { id = item.ProcessoId })                
+                @Html.ActionLink("Editar", "Edit", new { id = item.ProcessoId })|
+                @Html.ActionLink("Detalhes", "Details", new { id = item.ProcessoId })| 
+                @Html.ActionLink("Deletar", "Delete", new { id = item.ProcessoId })|               
+                @Html.ActionLink("Docs.", "TodoProcesso", new { id = item.ProcessoId })                
             </td>
         </tr>
     }

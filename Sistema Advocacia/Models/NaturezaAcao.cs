@@ -20,13 +20,11 @@ namespace Sistema_Advocacia.Models
         public int NaturezaAcaoID { get; set; }
 
         [Display(Name = "Ramo do Direito")]
-        [Range(1, int.MaxValue, ErrorMessage = "Selecione um registro!")]
-        [Required(ErrorMessage = "Você precisa entrar com o {0}")]
+        [Range(1, int.MaxValue, ErrorMessage = "Selecione um registro!")]        
         public RamoDireito? RamoDireito { get; set; }
 
-
-        [Display(Name = "Natureza da Ação")]
-        [Required(ErrorMessage = "Você precisa entrar com o campo {0}")]
+        [Required]
+        [Display(Name = "Natureza da Ação")]        
         public string Nome { get; set; }
 
 
