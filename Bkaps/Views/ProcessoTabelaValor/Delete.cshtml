@@ -1,0 +1,71 @@
+﻿@model Sistema_Advocacia.Models.ProcessoTabelaValor
+
+@{
+    ViewBag.Title = "Deletar";
+}
+
+<h3>Tem certeza que deseja deletar este item?</h3>
+<div>
+    <h4>Débito</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrigemCredito)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrigemCredito)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkDoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkDoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDebito)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDebito)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorOriginal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorOriginal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataAtualizacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataAtualizacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorAtualizado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorAtualizado)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Deletar" class="btn btn-default" /> |
+        @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })
+    </div>
+    }
+</div>

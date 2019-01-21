@@ -1,0 +1,58 @@
+﻿@model Sistema_Advocacia.Models.ProcessoDocumento
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Documento do Processo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Documento.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Documento.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Processo.Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Processo.Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Entregue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Entregue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Link)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Link)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ProcessoDocumentoId }) |
+    @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })
+</p>

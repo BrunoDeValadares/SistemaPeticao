@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Sistema_Advocacia.Models.Questionario>
+
+@{
+    ViewBag.Title = "IndexTeste";
+}
+
+<h2>IndexTeste</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessoPeticao.LinkQuestionario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TituloTrecho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pergunta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resposta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Exemplo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataModificacao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcessoPeticao.LinkQuestionario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TituloTrecho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pergunta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resposta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Exemplo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataModificacao)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.QuestionarioId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.QuestionarioId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionarioId })
+        </td>
+    </tr>
+}
+
+</table>

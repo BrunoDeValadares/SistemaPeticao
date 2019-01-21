@@ -1,0 +1,83 @@
+﻿@model Sistema_Advocacia.Models.ProcessoPeticao
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Petição do Processo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PeticaoModelo.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PeticaoModelo.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcessoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkPeticao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkPeticao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataProtocolizacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataProtocolizacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataProtocolizacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataProtocolizacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Finalizada)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Finalizada)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ProcessoPeticaoId }) |    
+    @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })
+</p>

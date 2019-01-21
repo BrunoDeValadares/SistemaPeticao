@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Sistema_Advocacia.Models.Questionario>
+
+@{
+    ViewBag.Title = "Lista";
+}
+
+@if (Model.Count() > 0)
+{
+    string Cliente = Model.First().ProcessoPeticao.Processo.Cliente.Nome;    
+    <h4>Questionário de @Cliente:  @ViewBag.Peticao</h4>
+}
+
+
+<p>
+    <!--Html.ActionLink("Create New", "Create")-->
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TituloTrecho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pergunta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resposta)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TituloTrecho)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pergunta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resposta)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.QuestionarioId }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.QuestionarioId }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.QuestionarioId })
+
+
+            </td>
+        </tr>
+    }
+</table>
+
+@if (Model.Count() > 0)
+{
+    @Html.ActionLink("Voltar", "TodoProcesso", "Processo", new { id = Model.First().ProcessoPeticao.ProcessoId }, null)
+}
+
+
+
+

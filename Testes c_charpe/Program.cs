@@ -17,7 +17,11 @@ namespace Testes_c_charpe
             Console.WriteLine(PrimeiroNome);
             Console.ReadKey();
             */
-            PrimeiroNome();
+            //PrimeiroNome();
+            //RegexAnexo();
+            AprenderIndexOf();
+            
+
         }
 
         static void PrimeiroNome()
@@ -28,5 +32,26 @@ namespace Testes_c_charpe
             Console.ReadKey();
 
         }
+
+        static void RegexAnexo()
+        {
+            string Padrao = @"doc_[0-9]*";
+
+            Regex regex = new Regex(Padrao);
+
+            string Texto = "{jogador gogue doc_35 e que pode ir pra csa doc_37, na sua casa}";
+            var resultado = regex.Matches(Texto);
+        }
+
+        static void AprenderIndexOf()
+        {
+            string anexo = "doc_125456812548";
+            var anexoId = anexo.Substring(4);
+            Console.WriteLine("anexo: " + anexoId);
+            Console.ReadKey();
+        }
     }
+
+
+
 }

@@ -1,0 +1,82 @@
+﻿@model Sistema_Advocacia.Models.Processo
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Processo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NaturezaAcao.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NaturezaAcao.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumoDoCaso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResumoDoCaso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroProcesso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroProcesso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkProcesso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkProcesso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vara)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vara)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ProcessoId }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

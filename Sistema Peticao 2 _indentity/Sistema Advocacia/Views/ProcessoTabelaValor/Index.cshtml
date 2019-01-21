@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Sistema_Advocacia.Models.ProcessoTabelaValor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrigemCredito)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LinkDoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataDebito)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorOriginal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataAtualizacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorAtualizado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrigemCredito)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LinkDoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataDebito)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorOriginal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataAtualizacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorAtualizado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProcessoTabelaValorId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProcessoTabelaValorId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProcessoTabelaValorId })
+        </td>
+    </tr>
+}
+
+</table>

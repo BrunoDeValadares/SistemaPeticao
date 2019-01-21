@@ -1,0 +1,70 @@
+﻿@model Sistema_Advocacia.Models.ProcessoPeticao
+
+@{
+    ViewBag.Title = "Deletar";
+}
+
+<h3>Tem certeza que deseja deletar este item?</h3>
+<div>
+    <h4>Petição do Processo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PeticaoModelo.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PeticaoModelo.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcessoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkQuestionario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkQuestionario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkPeticao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkPeticao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Finalizada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Finalizada)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Deletar" class="btn btn-default" /> |
+        @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })
+    </div>
+    }
+</div>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Sistema_Advocacia.Models.ProcessoPeticao>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PeticaoModelo.Nome)
+        </th> 
+        <th>
+            @Html.DisplayNameFor(model => model.LinkQuestionario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LinkPeticao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Finalizada)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PeticaoModelo.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LinkQuestionario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comentario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LinkPeticao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Finalizada)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProcessoPeticaoId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProcessoPeticaoId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProcessoPeticaoId })
+        </td>
+    </tr>
+}
+
+</table>
