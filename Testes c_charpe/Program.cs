@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sistema_Advocacia.gerador;
+using Sistema_Advocacia.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +21,9 @@ namespace Testes_c_charpe
             */
             //PrimeiroNome();
             //RegexAnexo();
-            AprenderIndexOf();
+            //AprenderIndexOf();
+            TestarPeticaoRespondidade();
+            
             
 
         }
@@ -50,6 +54,29 @@ namespace Testes_c_charpe
             Console.WriteLine("anexo: " + anexoId);
             Console.ReadKey();
         }
+
+        static void TestarPeticaoRespondidade()
+        {
+            List<Questionario> questionarios = new List<Questionario>() {
+                new Questionario {TituloTrecho = "titulo1", ProcessoPeticaoId = 58, Pergunta = "1.1 pergunta aqui", Resposta = "R1" },
+                new Questionario {TituloTrecho = "titulo2",  ProcessoPeticaoId = 58, Pergunta = "1.2 - pergunta aqui", Resposta = "R2" },                
+                new Questionario {TituloTrecho = "titulo3",  ProcessoPeticaoId = 58, Pergunta = "P3"},
+                new Questionario {TituloTrecho = "titulo4",  ProcessoPeticaoId = 58, Pergunta = "P4"}
+            };
+            string peticao = "{titulo1& [1.1 pergunta aqui] abc[1.2 - pergunta aqui] abc[1.3 - pergunta aqui] doc_1 que está bem ali }" +
+    "{titulo2& [2.1 pergunta aqui] abcabc doc_2 [2.2 - pergunta aqui] abc[2.3 - pergunta aqui]}" +
+    "{titulo3& [3.1 pergunta aqui] abcabc doc_3 [3.2 - pergunta aqui] abc[3.3 - pergunta aqui]}";           
+
+
+            GerarQuestionario gerarQuestionario = new GerarQuestionario();
+            var peticaoRespondida = gerarQuestionario.MontarPeticao(peticao, questionarios);
+            Console.WriteLine(peticaoRespondida);
+            Console.ReadKey();
+
+
+
+        }
+
     }
 
 

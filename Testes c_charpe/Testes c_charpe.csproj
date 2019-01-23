@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sistema Advocacia\Sistema Advocacia.csproj">
+      <Project>{FB8583E5-7598-4EEF-A8B6-24F1FBF90B91}</Project>
+      <Name>Sistema Advocacia</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

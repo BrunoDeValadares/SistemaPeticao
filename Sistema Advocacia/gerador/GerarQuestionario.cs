@@ -3,6 +3,7 @@ using Sistema_Advocacia.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -32,17 +33,20 @@ namespace Sistema_Advocacia.gerador
         private DBContext db = new DBContext();
 
 
+        //Perguntas 
+        //0-estrai todas perguntas de uma Petição Anotada
         public List<Pergunta> ExtrairPerguntas(string Texto)
         {
             var perguntas = new List<Pergunta>();
             string PadraoTrecho = @"\{([^&]*)[^\}]*\}";
-            string PadraoPergunta = @"\[[^\]]*\]";
+            string PadraoPergunta = @"\[([^\]]*)\]";
 
             Regex RgxTrecho = new Regex(PadraoTrecho);
             var encontrados = RgxTrecho.Matches(Texto);
 
             foreach (Match trechoEncontrado in encontrados)
             {
+                
                 var trecho = trechoEncontrado.Groups[0].Value;
                 var titulo = trechoEncontrado.Groups[1].Value;
 
@@ -51,37 +55,42 @@ namespace Sistema_Advocacia.gerador
 
                 foreach (Match perguntaEncontrada in PerguntasEncontradas)
                 {
-                    perguntas.Add(new Pergunta { TituloTrecho = titulo, pergunta = perguntaEncontrada.Value });
-                }             
+                    //perguntas.Add(new Pergunta { TituloTrecho = titulo, pergunta = perguntaEncontrada.Value });
+                    perguntas.Add(new Pergunta { TituloTrecho = titulo, pergunta = perguntaEncontrada.Groups[1].Value});
+                }
 
             }
             return perguntas;
         }
 
+        //1-Verifica se há perguntas iguais ou se há titulos iguais
         public string ValidarExtrairPeguntas(List<Pergunta> perguntas)
         {
-            //string mensagemErro = null;
+            string mensagemErro = null;
             var perguntasRepetidas = perguntas.Select(p => p.pergunta).Distinct();
 
             if ((perguntas.Count > 0) && (perguntas.Count() > perguntasRepetidas.Count()))
-                // return "Erro: uma pergunta não pode ser identica a outra em uma mesma petição";
-                throw new System.Exception("Erro: uma pergunta não pode ser identica a outra em uma mesma petição");
+            {
+                mensagemErro = "Erro: uma pergunta não pode ser identica a outra em uma mesma petição";
+                return mensagemErro;
+            }
 
-            return "ok";
+            return mensagemErro;
         }
 
-
+        //2-Retorna o trecho inteiro de uma determinada pergunta pra 
         public string GetExemplo(string peticao, string titulo)
         {
 
             string padrao = titulo + @"&([^\}]*)";//[^\}]*
             //string padrao =  @"titulo2&([^\}]*)";//[^\}]*
             Regex regex = new Regex(padrao);
-            return regex.Match(peticao).Groups[1].Value;           
+            return regex.Match(peticao).Groups[1].Value;
 
         }
 
-        public void CriarQuestionario(int processoPeticaoId)
+        //3-Gere o questionário
+        public void GerarQuestionarioNoBD(int processoPeticaoId)
         {
             ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);
             //PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(peticaoModeloId);
@@ -107,43 +116,45 @@ namespace Sistema_Advocacia.gerador
             db.SaveChanges();
         }
 
+        //04-Montar petição
+        public string MontarPeticao(string peticao, List<Questionario> questionarios)
+        {            
+            StringBuilder peticaoFinalizada = new StringBuilder();
+            peticaoFinalizada.Append(peticao) ;
+            if (peticao == null || questionarios == null)
+                return null;
 
-
-
-
-        public string CriarQuestionario2(int processoPeticaoId)
-        {
-            ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);
-            //PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(peticaoModeloId);
-            string TextoPeticao = processoPeticao.PeticaoModelo.PeticaoModificada;
-
-            if (TextoPeticao == null)
-                return "Erro: petição nula";
-
-            List<Pergunta> perguntas = ExtrairPerguntas(TextoPeticao);
-
-            //System.Diagnostics.Debug.WriteLine("******************************peticaoModelo.Nome" + processoPeticao.PeticaoModelo.Nome);
-
-            foreach (var pergunta in perguntas)
+            //substitua perguntas por respostas
+            foreach (var questionario in questionarios)
             {
-                db.Questionarios.Add(new Questionario
-                {
-                    ProcessoPeticaoId = processoPeticao.ProcessoPeticaoId,
-                    TituloTrecho = pergunta.TituloTrecho,
-                    Pergunta = pergunta.pergunta,
-                    DataModificacao = DateTime.Today
-                });
-
-
+                peticaoFinalizada.Replace(questionario.Pergunta, questionario.Resposta);                
             }
-            db.SaveChanges();
-            return "salvo";
+
+            //remova as anotações feitas petição
+            //string padrao = @"[&\{\}\[\]]";
+            string padrao = @"[&\{\}]";
+            var peticaoSemMarcadores =Regex.Replace(peticaoFinalizada.ToString(), padrao, "");
+
+            return peticaoSemMarcadores;
+            //var texto = peticaoFinalizada.ToString();
+            //var texto = peticaoFinalizada.ToString();
+
+            /*            
+            peticaoFinalizada.Replace("{", "");
+            peticaoFinalizada.Replace("}", "");
+            peticaoFinalizada.Replace("&", "");
+            peticaoFinalizada.Replace("[", "");
+            peticaoFinalizada.Replace("]", "");
+
+            
+            */
+
+            //return peticaoFinalizada.ToString();
+
         }
 
-
-
-                       //ANEXOS
-        //extrai anexos da petição dada como parametro
+        //ANEXOS
+        //0-extrai anexos da petição dada como parametro
         public List<Anexo> ExtrairAnexosPeticao(string peticao)
         {
             var anexos = new List<Anexo>();
@@ -171,7 +182,7 @@ namespace Sistema_Advocacia.gerador
             return anexos.Distinct().ToList();
         }
 
-        //Remove da lista de anexos, trecho com questões não respondidas
+        //1-Remove da lista de anexos, trecho com questões não respondidas
         public List<Anexo> ExtrairAnexosDoQuestionario(string peticao, List<Questionario> questionariosRespondidos)
         {
             var anexosPeticao = ExtrairAnexosPeticao(peticao);
@@ -189,7 +200,7 @@ namespace Sistema_Advocacia.gerador
             return anexosQuestionario.ToList();
         }
 
-        //Inseri anexos da Petição no banco de dados após removido anexos de trechos de questões não respondidas.
+        //2-Inseri anexos da Petição no banco de dados após removido anexos de trechos de questões não respondidas.
         public void GerarAnexosNoBD(string peticao, List<Questionario> questionariosRespondidos)
         {
             var anexosDoQuestionario = ExtrairAnexosDoQuestionario(peticao, questionariosRespondidos);
@@ -204,34 +215,53 @@ namespace Sistema_Advocacia.gerador
             db.SaveChanges();
         }
 
-        //apagar
-        public void GerarAnexosProcesso(List<Questionario> questionariosRespondidos)
-        {
-            Questionario questionario = questionariosRespondidos.First();
-            int processoId = (int)questionario.ProcessoPeticao.ProcessoId;
 
-            string peticao = questionario.ProcessoPeticao.PeticaoModelo.PeticaoModificada;
-            var anexosPeticao = ExtrairAnexosPeticao(peticao);
 
-            foreach (var anexoPeticao in anexosPeticao)
-            {
-                //se o titulo do trecho não tiver nenhuma resposta no questionario, exclua os anexos vinculados ao trecho. 
-                if (!questionariosRespondidos.Any(q => q.TituloTrecho == anexoPeticao.TituloTrecho && q.Resposta != null))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+                public string CriarQuestionario2(int processoPeticaoId)
                 {
-                    anexosPeticao.RemoveAll(a => a.TituloTrecho == anexoPeticao.TituloTrecho);
+                    ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);
+                    //PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(peticaoModeloId);
+                    string TextoPeticao = processoPeticao.PeticaoModelo.PeticaoModificada;
+
+                    if (TextoPeticao == null)
+                        return "Erro: petição nula";
+
+                    List<Pergunta> perguntas = ExtrairPerguntas(TextoPeticao);
+
+                    //System.Diagnostics.Debug.WriteLine("******************************peticaoModelo.Nome" + processoPeticao.PeticaoModelo.Nome);
+
+                    foreach (var pergunta in perguntas)
+                    {
+                        db.Questionarios.Add(new Questionario
+                        {
+                            ProcessoPeticaoId = processoPeticao.ProcessoPeticaoId,
+                            TituloTrecho = pergunta.TituloTrecho,
+                            Pergunta = pergunta.pergunta,
+                            DataModificacao = DateTime.Today
+                        });
+
+
+                    }
+                    db.SaveChanges();
+                    return "salvo";
                 }
-            }
-            //inclua no bd se já não estiver incluido
-            foreach (var anexoPeticao in anexosPeticao)
-            {
-                if (!db.ProcessoDocumentoes.Any(pd => pd.ProcessoId == processoId && pd.ProcessoDocumentoId == anexoPeticao.AnexoId))
-                    db.ProcessoDocumentoes.Add(new ProcessoDocumento { ProcessoId = processoId, DocumentoId = anexoPeticao.AnexoId });
-            }
-            db.SaveChanges();
-        }
 
-
-
+        */
 
     }
 }

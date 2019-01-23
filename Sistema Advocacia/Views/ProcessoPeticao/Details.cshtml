@@ -77,7 +77,14 @@
 
     </dl>
 </div>
+
+<h4>Petição Finalizada</h4>
+@Html.TextAreaFor(model => model.PeticaoRespondida, 20, 10, htmlAttributes: new { style = "width: 60%; max-width: 100%;", @readonly = "readonly", @class = "form-control"})
+
+
+
+
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ProcessoPeticaoId }) |    
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ProcessoPeticaoId }) |
     @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })
 </p>

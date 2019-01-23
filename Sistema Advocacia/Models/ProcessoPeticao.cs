@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Sistema_Advocacia.Context;
+using Sistema_Advocacia.gerador;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -46,6 +50,27 @@ namespace Sistema_Advocacia.Models
         [Display(Name = "Data Protocolização")]
         [DataType(DataType.Date)]
         public DateTime? DataProtocolizacao { get; set; }
+
+        
+        [NotMapped]
+        public string PeticaoRespondida
+        {
+            get
+            {
+                string peticaoRespondida = null;
+                DBContext db= new DBContext();
+                var questionarios = db.Questionarios.Where(q => q.ProcessoPeticaoId == ProcessoPeticaoId).ToList();
+                
+                if (questionarios.Count > 0)
+                {
+                    GerarQuestionario gerarQuestionario = new GerarQuestionario();
+                    peticaoRespondida = gerarQuestionario.MontarPeticao(PeticaoModelo.PeticaoModificada, questionarios);
+                }
+
+                return peticaoRespondida;
+            }            
+        }
+
 
         public virtual PeticaoModelo PeticaoModelo { get; set; }
         public virtual Processo Processo{ get; set; }

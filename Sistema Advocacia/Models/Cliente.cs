@@ -155,6 +155,8 @@ namespace Sistema_Advocacia.Models
 
 
 
+
+
                 string numero = string.Format("nº {0},", Numero);
                 string setor = string.Format("Setor {0},", Setor);
 
@@ -175,12 +177,42 @@ namespace Sistema_Advocacia.Models
 
                 string endereco = string.Format("{0} {1} {2} {3}-{4}", logradouro, numero, setor, Cidade, Estado);
 
+
+
+
                 return endereco;
                 ;
             }
         }
 
         public string Qualificacao_
+        {
+            get
+            {
+                string vogalSexo = (int)Sexo == 1? "o" : "a";
+
+                string logradouro = (Logradouro != null) ? ", residente e domiciliado à " + Logradouro : null;
+                string numero = (Numero != null) ? ", nº " + Numero : null;
+                string quadra = (Quadra != null) ? ", quadra " + Quadra : null;
+                string lote = (Lote != null) ? ", lote " + Lote : null;
+                string setor = (Setor != null) ? ", Setor " + Setor : null;
+                string cidade = (Cidade != null) ? ", " + Cidade : null;
+                string estado = (Quadra != null) ? "-" + Estado : null;
+                string endereco = string.Concat(logradouro, numero, quadra, lote, setor, cidade, estado);
+                          
+                string cpf =  (CPF != null)?  string.Format(", inscrit{0} no CPF sob o nº {1}", vogalSexo, CPF) : null;
+                string rg = (RG != null)?  string.Format(", com cédula de identidade nº {0}", RG): null ;
+
+                return string.Format("{0}, {1}, {2}{3}{4}{5}", Nome, Nacionalidade, EstadoCivil, cpf, rg, endereco);
+            }
+        }
+
+
+
+
+
+
+        public string Qualificacao_2
         {
             get
             {

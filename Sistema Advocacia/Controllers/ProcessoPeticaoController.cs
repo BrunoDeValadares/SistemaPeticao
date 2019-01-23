@@ -95,6 +95,10 @@ namespace Sistema_Advocacia.Controllers
             {
                 db.ProcessoPeticaos.Add(processoPeticao);
                 db.SaveChanges();
+
+                GerarQuestionario gerarQuestionario = new GerarQuestionario();
+                gerarQuestionario.GerarQuestionarioNoBD(processoPeticao.ProcessoPeticaoId);
+
                 return RedirectToAction("TodoProcesso", "Processo", new { id = processoPeticao.ProcessoId });
             }
 
