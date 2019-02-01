@@ -22,9 +22,13 @@ namespace Testes_c_charpe
             //PrimeiroNome();
             //RegexAnexo();
             //AprenderIndexOf();
-            TestarPeticaoRespondidade();
-            
-            
+            //TestarPeticaoRespondidade();
+            //TestarRegexTitulo();
+            //TestarRegexSubTitulo();
+            TestarRegexNegrito();
+
+
+
 
         }
 
@@ -75,6 +79,67 @@ namespace Testes_c_charpe
 
 
 
+        }
+
+        static void TestarRegexTitulo()
+        {
+            string txt = "corpo de texto\nTitulo1-de jogardores\n---\nCorpo de texto\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
+            //string txt = "Jogador de basebol\nTitulo1-de jogardores\n---\nCorpo de texto";
+            //string txt = "\nTitulo1------\nCorpo de texto";
+            string padraoTitulo = @"(.*)\n-{3,}";
+            Regex regex = new Regex(padraoTitulo);
+            string resultado = regex.Match(txt).Groups[1].Value;
+
+
+          //  Console.WriteLine(txt);
+           // Console.WriteLine();
+            Console.WriteLine(resultado);
+            Console.ReadKey();
+        }
+
+
+        static void TestarRegexSubTitulo()
+        {
+            string txt = "corpo de texto\nTitulo1-de jogardores\n---\nCorpo de texto\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
+            //string txt = "\nTitulo1------\n------\nCorpo de texto";
+            string padraoTitulo = @"(.*)\n-{3,}\n-{3,}";
+            Regex regex = new Regex(padraoTitulo);
+            string resultado = regex.Match(txt).Groups[1].Value;
+
+
+            //  Console.WriteLine(txt);
+            // Console.WriteLine();            Console.WriteLine(resultado);
+            Console.ReadKey();
+        }
+
+        static void TestarRegexNegrito()
+        {
+            //string txt = "corpo de texto\nTitulo1-de \n---\nCorpo de**negrito aqui. E seguindo, __**sublinhado aqui**__texto, e _texto italico_ aqui\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
+            string txt = "corpo de texto\nTitulo1-de \n---\nCorpo de**negrito aqui. E seguindo, , e _texto italico_ aqui\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
+
+            string padraoNegrito = @"\*{2}(.*)\*{2}";
+            string padraoSublinhado = @"_{2}(.*)_{2}";  //MAIS CORRETO
+            //string padraoItalico = @"_(.*)[^_][^\w]";
+            //string padraoItalico = @"_([^_]*)";
+            //string PadraoPergunta = @"_([^_]*)_";
+
+            //string padraoSublinhado = @"_{2}\*{0,}(.*)_{2}";  //CORRETO
+            //string padraoSublinhado = @"_{2}\*{2}([^/*]*)_{2}";
+
+
+
+            //string padraoSublinhado = @"_{2}\*{0,}([.*])_{2}";
+            Regex regex = new Regex(padraoNegrito);
+            //Regex regex = new Regex(padraoSublinhado);
+            //Regex regex = new Regex(padraoItalico);
+
+            string resultado = regex.Match(txt).Groups[1].Value;
+
+
+            //  Console.WriteLine(txt);
+            // Console.WriteLine();
+            Console.WriteLine(resultado);
+            Console.ReadKey();
         }
 
     }

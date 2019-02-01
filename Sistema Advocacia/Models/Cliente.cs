@@ -207,9 +207,34 @@ namespace Sistema_Advocacia.Models
             }
         }
 
+        public string QualificacaoComNomeVazio_
+        {
+            get
+            {
+                string vogalSexo = (int)Sexo == 1 ? "o" : "a";
+
+                string nacionalidade = (Nacionalidade != null) ? ", " + Nacionalidade : null;
+                string estadoCivil = ((int)EstadoCivil != 0) ? ", " + EstadoCivil : null;
+                string logradouro = (Logradouro != null) ? ", residente e domiciliado à " + Logradouro : null;
+                string numero = (Numero != null) ? ", nº " + Numero : null;
+                string quadra = (Quadra != null) ? ", quadra " + Quadra : null;
+                string lote = (Lote != null) ? ", lote " + Lote : null;
+                string setor = (Setor != null) ? ", Setor " + Setor : null;
+                string cidade = (Cidade != null) ? ", " + Cidade : null;
+                string estado = (Estado != null) ? "-" + Estado : null;
+                string endereco = string.Concat(logradouro, numero, quadra, lote, setor, cidade, estado);
+
+                string cpf = (CPF != null) ? string.Format(", inscrit{0} no CPF sob o nº {1}", vogalSexo, CPF) : null;
+                string rg = (RG != null) ? string.Format(", com cédula de identidade nº {0}", RG) : null;
+
+                return string.Concat(nacionalidade, estadoCivil, cpf, rg, endereco);
+                //return string.Format("{0}{1}{2}{3}{4}", Nacionalidade, EstadoCivil, cpf, rg, endereco);
+            }
+        }
 
 
 
+        
 
 
         public string Qualificacao_2

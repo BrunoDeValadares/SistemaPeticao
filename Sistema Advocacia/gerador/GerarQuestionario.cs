@@ -203,6 +203,8 @@ namespace Sistema_Advocacia.gerador
         //2-Inseri anexos da Petição no banco de dados após removido anexos de trechos de questões não respondidas.
         public void GerarAnexosNoBD(string peticao, List<Questionario> questionariosRespondidos)
         {
+            //var templatePath = System.Web.HttpContext.Current.Server.MapPath("~/Templates/report.xlsx");
+
             var anexosDoQuestionario = ExtrairAnexosDoQuestionario(peticao, questionariosRespondidos);
             var processoId = (int)questionariosRespondidos.First().ProcessoPeticao.ProcessoId;
 

@@ -75,6 +75,8 @@ namespace Sistema_Advocacia.gerador
         {
 
             string padrao = titulo + @"&([^\}]*)";//[^\}]*
+
+
             //string padrao =  @"titulo2&([^\}]*)";//[^\}]*
             Regex regex = new Regex(padrao);
             return regex.Match(peticao).Groups[1].Value;           
