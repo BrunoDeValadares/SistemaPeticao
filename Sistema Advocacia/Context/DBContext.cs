@@ -37,5 +37,9 @@ namespace Sistema_Advocacia.Context
         public System.Data.Entity.DbSet<Sistema_Advocacia.Models.ProcessoTabelaValor> ProcessoTabelaValors { get; set; }
 
         public System.Data.Entity.DbSet<Sistema_Advocacia.Models.Questionario> Questionarios { get; set; }
+
+        public System.Data.Entity.DbSet<Sistema_Advocacia.Models.Pessoa> Pessoas { get; set; }
+
+        public System.Data.Entity.DbSet<Sistema_Advocacia.Models.ProcessoParte> ProcessoPartes { get; set; }
     }
 }

@@ -34,6 +34,11 @@ namespace Sistema_Advocacia.Models
         [Required]
         public string Nome { get; set; }
 
+        [Display(Name ="Nome da Ação")]
+        [StringLength(50, MinimumLength = 3)]
+        [Required]
+        public string NomeAcao { get; set; }
+
         [Required]
         [Display(Name ="Natureza da ação")]
         //[Required(ErrorMessage = "Digite um valor para o campo {0}!")]
@@ -47,7 +52,12 @@ namespace Sistema_Advocacia.Models
               
         [Display(Name = "Petição Modificada")]
         [DataType(DataType.MultilineText)]       
-        public string PeticaoModificada { get; set; }        
+        public string PeticaoModificada { get; set; }
+
+        [Display(Name = "Direito")]
+        public string Direito { get; set; }
+
+        public string Pedido { get; set; }
 
         //public string Peticao { get; set; }
 
@@ -55,7 +65,6 @@ namespace Sistema_Advocacia.Models
         [DataType(DataType.MultilineText)]
         public string Comentario { get; set; }
 
-        public virtual NaturezaAcao NaturezaAcao { get; set; }
-        
+        public virtual NaturezaAcao NaturezaAcao { get; set; }        
     }
 }

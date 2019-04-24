@@ -113,6 +113,38 @@
 
 </table>
 
+<h3>Partes</h3>
+@Html.ActionLink("Novo", "Create", "ProcessoParte", new { processoId = Model.Processo.ProcessoId }, null)
+
+<table class="table">
+    <tr>
+        <th>Nome</th>
+
+        <th>Autor?Réu?</th>
+
+        <th></th>
+    </tr>
+
+    @foreach (ProcessoParte item in Model.ProcessoPartes)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Papel)
+            </td>
+
+            <td>
+                @Html.ActionLink("Editar", "Edit", "ProcessoParte", new { id = item.ProcessoParteId}, null) |
+                @Html.ActionLink("Detalhes", "Details", "ProcessoParte", new { id = item.ProcessoParteId}, null) |
+                @Html.ActionLink("Deletar", "Delete", "ProcessoParte", new { id = item.ProcessoParteId }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
 
 <h3>Tabela de Valores</h3>
 @Html.ActionLink("Novo", "Create", "ProcessoTabelaValor", new { processoId = Model.Processo.ProcessoId }, null)

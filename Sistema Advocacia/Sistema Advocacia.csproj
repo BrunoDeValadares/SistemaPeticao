@@ -210,14 +210,17 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NaturezaAcaoController.cs" />
+    <Compile Include="Controllers\PessoaController.cs" />
     <Compile Include="Controllers\PeticaoModeloController.cs" />
     <Compile Include="Controllers\ProcessoController.cs" />
     <Compile Include="Controllers\ProcessoDocumentoController.cs" />
+    <Compile Include="Controllers\ProcessoParteController.cs" />
     <Compile Include="Controllers\ProcessoPeticaoController.cs" />
     <Compile Include="Controllers\ProcessoTabelaValorController.cs" />
     <Compile Include="Controllers\QuestionarioController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="gerador\GerarArquivo.cs" />
+    <Compile Include="gerador\GerarDocumento.cs" />
     <Compile Include="gerador\GerarQuestionario.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -233,11 +236,14 @@
     <Compile Include="Models\Colaborador.cs" />
     <Compile Include="Models\Documento.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\keyAttribute.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NaturezaAcao.cs" />
+    <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\PeticaoModelo.cs" />
     <Compile Include="Models\Processo.cs" />
     <Compile Include="Models\ProcessoDocumento.cs" />
+    <Compile Include="Models\ProcessoParte.cs" />
     <Compile Include="Models\ProcessoPeticao.cs" />
     <Compile Include="Models\ProcessoTabelaValor.cs" />
     <Compile Include="Models\Questionario.cs" />
@@ -371,6 +377,17 @@
     <Content Include="Views\GerarWord.cshtml" />
     <Content Include="Views\GerarWord\GerarWord.cshtml" />
     <Content Include="Templates\PeticaoModelo.docx" />
+    <Content Include="Views\ProcessoPeticao\GerarPeticao.cshtml" />
+    <Content Include="Views\Pessoa\Create.cshtml" />
+    <Content Include="Views\Pessoa\Delete.cshtml" />
+    <Content Include="Views\Pessoa\Details.cshtml" />
+    <Content Include="Views\Pessoa\Edit.cshtml" />
+    <Content Include="Views\Pessoa\Index.cshtml" />
+    <Content Include="Views\ProcessoParte\Create.cshtml" />
+    <Content Include="Views\ProcessoParte\Delete.cshtml" />
+    <Content Include="Views\ProcessoParte\Details.cshtml" />
+    <Content Include="Views\ProcessoParte\Edit.cshtml" />
+    <Content Include="Views\ProcessoParte\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

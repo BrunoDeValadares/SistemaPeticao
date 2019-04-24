@@ -1,0 +1,34 @@
+﻿@model Sistema_Advocacia.Models.ProcessoParte
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProcessoParte</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pessoa.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pessoa.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Papel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Papel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProcessoParteId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

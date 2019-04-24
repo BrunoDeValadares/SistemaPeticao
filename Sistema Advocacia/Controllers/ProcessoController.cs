@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Sistema_Advocacia.Context;
+using Sistema_Advocacia.gerador;
 using Sistema_Advocacia.Models;
 using Sistema_Advocacia.ViewModels;
 
@@ -32,8 +33,13 @@ namespace Sistema_Advocacia.Controllers
             todoProcesso.ProcessoDocumentos = db.ProcessoDocumentoes.Where(x => x.ProcessoId == id).Include(x => x.Documento).ToList();
             todoProcesso.ProcessoTabelaValores = db.ProcessoTabelaValors.Where(x => x.ProcessoId == id).ToList();
 
+            todoProcesso.ProcessoPartes = db.ProcessoPartes.Where(x => x.ProcessoId == id).ToList();
             return View(todoProcesso); 
         }
+
+
+
+
 
         // GET: Processo/Details/5
         public ActionResult Details(int? id)
@@ -63,7 +69,7 @@ namespace Sistema_Advocacia.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProcessoId,ClienteId,NaturezaAcaoId,Ativo,Comentario,ResumoDoCaso,NumeroProcesso,LinkProcesso,Vara")] Processo processo)
+        public ActionResult Create([Bind(Include = "ProcessoId,ClienteId,NaturezaAcaoId,Ativo,Comentario,ResumoDoCaso,NumeroProcesso,LinkProcesso,Vara, Enderecamento")] Processo processo)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +105,7 @@ namespace Sistema_Advocacia.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProcessoId,ClienteId,NaturezaAcaoId,Ativo,Comentario,ResumoDoCaso,NumeroProcesso,LinkProcesso,Vara")] Processo processo)
+        public ActionResult Edit([Bind(Include = "ProcessoId,ClienteId,NaturezaAcaoId,Ativo,Comentario,ResumoDoCaso,NumeroProcesso,LinkProcesso,Vara, Enderecamento")] Processo processo)
         {
             if (ModelState.IsValid)
             {

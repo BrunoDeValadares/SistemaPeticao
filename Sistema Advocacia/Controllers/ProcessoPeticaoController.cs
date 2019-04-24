@@ -18,6 +18,18 @@ namespace Sistema_Advocacia.Controllers
     {
         private DBContext db = new DBContext();
 
+        public ActionResult GerarPeticao(int id)
+        {
+            GerarDocumento gerarDocumento = new GerarDocumento();
+            var processoPeticao = db.ProcessoPeticaos.Find(id);            
+
+            var peticao = gerarDocumento.construirPeticao(processoPeticao);
+            gerarDocumento.gerarDocumento(peticao);         
+
+            return View();
+        }
+
+
         // GET: ProcessoPeticao
         public ActionResult Index()
         {
@@ -97,7 +109,8 @@ namespace Sistema_Advocacia.Controllers
                 db.SaveChanges();
 
                 GerarQuestionario gerarQuestionario = new GerarQuestionario();
-                gerarQuestionario.GerarQuestionarioNoBD(processoPeticao.ProcessoPeticaoId);
+                //gerarQuestionario.GerarQuestionarioNoBD(processoPeticao.ProcessoPeticaoId);
+                gerarQuestionario.GerarQuestionarioNoBD2(processoPeticao.ProcessoPeticaoId);
 
                 return RedirectToAction("TodoProcesso", "Processo", new { id = processoPeticao.ProcessoId });
             }

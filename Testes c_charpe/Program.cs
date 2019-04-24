@@ -11,6 +11,11 @@ namespace Testes_c_charpe
 {
     class Program
     {
+        public class Pergunta
+        {
+            public string Topico { get; set; }
+            public string Pergunt { get; set; }
+        }
         static void Main(string[] args)
         {
             /*
@@ -25,13 +30,148 @@ namespace Testes_c_charpe
             //TestarPeticaoRespondidade();
             //TestarRegexTitulo();
             //TestarRegexSubTitulo();
-            TestarRegexNegrito();
-
-
-
-
+            //TestarRegexNegrito();
+            //TestarRegexPedido();
+            //ExtrairPerguntas();
+            //testarRegexNegrito2();
+            //testarStringBuilder();
+            testarRegexPerguntas();
         }
 
+        static void TestarRegexSubTitulo()
+        {
+            string txt = "corpo de texto\nTitulo1-de jogardores\n---\nCorpo de texto\nSubTitulo1-de jogardores\n---\n---\nCorpo de texto\nCorpo de texto\nSubTitulo2-de jogardores\n---\n---\nCorpo de texto";
+            //string txt = "\nTitulo1------\n------\nCorpo de texto";
+            //string padraoTitulo = @"(.*)\n-{3,}\n-{3,}";
+            string padraoTitulo = @".*\n-{3,}\n-{3,}";
+
+            Regex regex = new Regex(padraoTitulo);
+            //string resultado = regex.Match(txt).Groups[1].Value;
+            string resultado = regex.Match(txt).Value;
+
+            //var result = new Regex(@"(.*)\n-{3,}\n-{3,}").Match(txt).Groups[1].Value;
+            var result = new Regex(@"(.*)\n-{3,}\n-{3,}");
+            txt = Regex.Replace(txt, padraoTitulo, "[Ttulo2]$0");
+
+            Console.WriteLine(txt);
+            Console.ReadKey();
+        }
+
+
+        static List<Pergunta> ExtrairPerguntas()
+        {
+            List<Pergunta> perguntas = new List<Pergunta>();
+            string txt = "SubTitulo1\n----\ntexto texto [pergunta01+1 aqui neste trecho] texto [pergunta01.2 aqui neste trecho] texto \nSubTitulo2\n---- texto [pergunta02.1 aqui neste trecho] texto [pergunta02.2 aqui neste trecho]";
+
+            //add o marcador "{{{" aos topicos
+            string titulosMarcado = Regex.Replace(txt, @".*\n-{2,}", "{{{$0");
+
+            //divide o texto em topicos
+            var topicos = titulosMarcado.Split(new string[] { "{{{" }, System.StringSplitOptions.None);
+
+            foreach (var topico in topicos)
+            {
+                //extraia apenas o  nome do topico
+                var nomeTopico = new Regex(@".*").Match(topico).Value;  
+                
+                //estraia todas perguntas do topico
+                var perguntasExtraidas = new Regex(@"\[.*?\]").Matches(topico);
+
+                //coloque as perguntas extraidas em uma LIst<pergunta>
+                foreach (var pergunta in perguntasExtraidas)
+                {
+                    perguntas.Add(new Pergunta { Topico = nomeTopico, Pergunt = pergunta.ToString() });
+                }
+            }
+            return perguntas;
+        }
+
+        static void ExtrairPerguntas2()
+        {
+            List<Pergunta> perguntas = new List<Pergunta>();
+            string txt = "SubTitulo1\n----\ntexto texto [pergunta01+1 aqui neste trecho] texto [pergunta01.2 aqui neste trecho] texto \nSubTitulo2\n---- texto [pergunta02.1 aqui neste trecho] texto [pergunta02.2 aqui neste trecho]";
+
+            //var resultTitulo = new Regex(@".*-{2,}").Matches(txt);
+            string titulosMarcado = Regex.Replace(txt, @".*\n-{2,}", "{{{$0");
+
+            Console.WriteLine(titulosMarcado);
+           
+            var topicos = titulosMarcado.Split(new string[] { "{{{" }, System.StringSplitOptions.None);
+
+#region consoles.writeline
+
+            /*
+            Console.WriteLine("Todos************************");
+            Console.WriteLine(topicos[0] + topicos[1]  + topicos[2]);
+
+            Console.WriteLine("[0]************************");
+            Console.WriteLine(topicos[0]);
+
+            Console.WriteLine("[1]************************");
+            Console.WriteLine(topicos[1] );
+
+            Console.WriteLine("[2]************************");
+            Console.WriteLine(topicos[2]);
+            */
+#endregion
+
+
+            foreach (var topico in topicos)
+            {
+                var nomeTopico = new Regex(@".*").Match(topico).Value;                
+
+                Console.WriteLine(nomeTopico);
+
+                var perguntasExtraidas = new Regex(@"\[.*?\]").Matches(topico);
+                foreach (var pergunta in perguntasExtraidas)
+                {
+                    perguntas.Add(new Pergunta { Topico = nomeTopico, Pergunt = pergunta.ToString() });
+                    
+                }
+                
+            }
+            Console.WriteLine("Topico" + " - " + "Pergunta");
+            foreach (Pergunta pergunta in perguntas)
+            {
+
+                Console.WriteLine(pergunta.Topico + " - " + pergunta.Pergunt);
+            }
+
+            //Console.Write(titulosMarcado);
+            var resultTitulo = new Regex(@".*-{2,}").Matches(txt);
+
+            foreach (Match item in resultTitulo)
+            {
+                //Console.WriteLine(item.Value);
+            }
+            
+            var resultado = new Regex(@"\[(.*?)\]").Matches(txt);
+            foreach (Match item in resultado)
+            {
+                //Console.WriteLine(item.Groups[1].Value);
+            }
+            //Console.WriteLine(resultado);
+            Console.ReadKey();
+        }
+
+        static void TestarRegexSubTitulo3()
+        {
+            string txt = "corpo de texto\nTitulo1-de jogardores\n---\nCorpo de texto\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
+            //string txt = "\nTitulo1------\n------\nCorpo de texto";
+            //string padraoTitulo = @"(.*)\n-{3,}\n-{3,}";
+            string padraoTitulo = @".*\n-{3,}\n-{3,}";
+
+            Regex regex = new Regex(padraoTitulo);
+            //string resultado = regex.Match(txt).Groups[1].Value;
+            string resultado = regex.Match(txt).Value;
+
+            //var result = new Regex(@"(.*)\n-{3,}\n-{3,}").Match(txt).Groups[1].Value;
+            var result = new Regex(@"(.*)\n-{3,}\n-{3,}");
+            txt = Regex.Replace(txt, padraoTitulo, "<jogue>$0</futebol>");
+
+            Console.WriteLine(resultado);
+            Console.ReadKey();
+        }
         static void PrimeiroNome()
         {
             Regex regex = new Regex(@"[\w]*");
@@ -40,7 +180,6 @@ namespace Testes_c_charpe
             Console.ReadKey();
 
         }
-
         static void RegexAnexo()
         {
             string Padrao = @"doc_[0-9]*";
@@ -50,7 +189,6 @@ namespace Testes_c_charpe
             string Texto = "{jogador gogue doc_35 e que pode ir pra csa doc_37, na sua casa}";
             var resultado = regex.Matches(Texto);
         }
-
         static void AprenderIndexOf()
         {
             string anexo = "doc_125456812548";
@@ -58,7 +196,6 @@ namespace Testes_c_charpe
             Console.WriteLine("anexo: " + anexoId);
             Console.ReadKey();
         }
-
         static void TestarPeticaoRespondidade()
         {
             List<Questionario> questionarios = new List<Questionario>() {
@@ -80,7 +217,6 @@ namespace Testes_c_charpe
 
 
         }
-
         static void TestarRegexTitulo()
         {
             string txt = "corpo de texto\nTitulo1-de jogardores\n---\nCorpo de texto\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
@@ -96,15 +232,16 @@ namespace Testes_c_charpe
             Console.WriteLine(resultado);
             Console.ReadKey();
         }
-
-
-        static void TestarRegexSubTitulo()
+        static void TestarRegexSubTitulo2()
         {
             string txt = "corpo de texto\nTitulo1-de jogardores\n---\nCorpo de texto\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
             //string txt = "\nTitulo1------\n------\nCorpo de texto";
             string padraoTitulo = @"(.*)\n-{3,}\n-{3,}";
             Regex regex = new Regex(padraoTitulo);
+            //string resultado = regex.Match(txt).Groups[1].Value;
             string resultado = regex.Match(txt).Groups[1].Value;
+
+            
 
 
             //  Console.WriteLine(txt);
@@ -112,13 +249,24 @@ namespace Testes_c_charpe
             Console.ReadKey();
         }
 
+
+
+
+
         static void TestarRegexNegrito()
         {
             //string txt = "corpo de texto\nTitulo1-de \n---\nCorpo de**negrito aqui. E seguindo, __**sublinhado aqui**__texto, e _texto italico_ aqui\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
-            string txt = "corpo de texto\nTitulo1-de \n---\nCorpo de**negrito aqui. E seguindo, , e _texto italico_ aqui\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
+            string txt = "corpo de texto\nTitulo1-de \n---\nCorpo de __**negrito aqui e sublinhado aqui**__. E seguindo **negrito ali**, , e _texto italico_ aqui\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
 
-            string padraoNegrito = @"\*{2}(.*)\*{2}";
-            string padraoSublinhado = @"_{2}(.*)_{2}";  //MAIS CORRETO
+            //string padraoNegrito = @"\*{2}(.*)\*{2}";
+            ///string padraoNegrito = @"\*{2}(.*)\*{2}"; ;
+            //string padraoNegrito = @"?<=\*(.*?)?=\*";
+            string padraoNegrito = @"\*{2}.*?\*{2}";
+            //string padraoSublinhado = @"_{2}.*?_{2}";  
+
+            //string padraoSublinhado = @"_{2}(.*)_{2}";  //MAIS CORRETO
+
+
             //string padraoItalico = @"_(.*)[^_][^\w]";
             //string padraoItalico = @"_([^_]*)";
             //string PadraoPergunta = @"_([^_]*)_";
@@ -134,15 +282,76 @@ namespace Testes_c_charpe
             //Regex regex = new Regex(padraoItalico);
 
             string resultado = regex.Match(txt).Groups[1].Value;
-
+            var resultados = regex.Matches(txt);
 
             //  Console.WriteLine(txt);
             // Console.WriteLine();
-            Console.WriteLine(resultado);
+            foreach (Match result in regex.Matches(txt))            
+                Console.WriteLine(result.Groups[0].Value);
+            
+            
+            Console.ReadKey();
+        }
+        static void TestarRegexPedido()
+        {
+            //string txt = "aqui existe um pedido que foi feito";
+            string txt = "aqui existe um MORTE que foi feito";
+            string padraoTitulo = @"MOR.*";
+            Regex regex = new Regex(padraoTitulo);
+            string resultado = regex.Match(txt).Value;
+
+
+             Console.WriteLine(resultado);
+            // Console.WriteLine();            Console.WriteLine(resultado);
             Console.ReadKey();
         }
 
+        static void testarRegexNegrito2()
+        {
+            string txt = "corpo de texto\nTitulo1-de \n---\nCorpo de __**negrito aqui e sublinhado aqui**__. E seguindo **negrito ali**, , e _texto italico_ aqui\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
+            var negritos = new Regex(@"\*\*.*?\*\*").Matches(txt);
+            foreach (Match item in negritos)
+            {
+                Console.WriteLine("valor: " + item.Value);
+            }
+
+            Console.ReadKey();
+
+        }
+
+        static void testarStringBuilder()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("mesma linha")
+                .Append("2 mesma linha")
+                .Append("3 mesma linha")
+                .AppendLine().AppendLine().Append("30 linha abaixo")
+            ;
+            Console.WriteLine(sb.ToString());
+            Console.ReadKey();
+
+        }
+
+        static void testarRegexPerguntas()
+        {
+            string txt = "SubTitulo1\n----\ntexto texto [pergunta01+1 aqui neste trecho] texto [pergunta01.2 aqui neste trecho] texto \nSubTitulo2\n---- texto [pergunta02.1 aqui neste trecho] texto [pergunta02.2 aqui neste trecho]";
+            var perguntas = new Regex(@"\[.*?\]").Matches(txt);
+            int i = 1;
+            foreach (Match item in perguntas)
+            {
+                
+                Console.WriteLine(i + ":   " + item.Value);
+                i ++;
+            }
+            Console.WriteLine(perguntas.Count);
+
+            Console.ReadKey();
+
+
+        }
     }
+
+
 
 
 

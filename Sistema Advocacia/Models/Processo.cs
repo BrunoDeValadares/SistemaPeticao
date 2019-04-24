@@ -29,7 +29,7 @@ namespace Sistema_Advocacia.Models
         public string ResumoDoCaso { get; set; }
         
         [Display(Name ="Numero do Processo")]
-        public int? NumeroProcesso { get; set; }
+        public string NumeroProcesso { get; set; }
         
 
         [Display(Name ="Link Processo")]
@@ -37,6 +37,9 @@ namespace Sistema_Advocacia.Models
         public string LinkProcesso { get; set; }
 
         public string Vara { get; set; }
+
+        [Display(Name = "Endereçamento")]
+        public string enderecamento { get; set; }
 
         /*
         [DataType(DataType.DateTime)]

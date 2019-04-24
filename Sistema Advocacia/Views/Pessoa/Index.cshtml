@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Sistema_Advocacia.Models.Pessoa>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>           
+        <th>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>
+ 
+        <th>
+            @Html.DisplayNameFor(model => model.Cidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ClienteAdvocaticia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Autor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Colaborador)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cidade)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClienteAdvocaticia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Autor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Colaborador)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PessoaId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PessoaId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PessoaId })
+        </td>
+    </tr>
+}
+
+</table>

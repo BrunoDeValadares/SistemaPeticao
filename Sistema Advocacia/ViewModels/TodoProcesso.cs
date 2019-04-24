@@ -16,5 +16,7 @@ namespace Sistema_Advocacia.ViewModels
 
         public List<ProcessoTabelaValor> ProcessoTabelaValores { get; set; }
 
+        public List<ProcessoParte> ProcessoPartes { get; set; }
+
     }
 }

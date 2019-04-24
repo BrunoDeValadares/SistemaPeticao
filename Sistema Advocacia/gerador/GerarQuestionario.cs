@@ -33,6 +33,10 @@ namespace Sistema_Advocacia.gerador
         private DBContext db = new DBContext();
 
 
+
+
+
+
         //Perguntas 
         //0-estrai todas perguntas de uma Petição Anotada
         public List<Pergunta> ExtrairPerguntas(string Texto)
@@ -218,18 +222,30 @@ namespace Sistema_Advocacia.gerador
         }
 
 
+        //Gerar Questionário
+        public void GerarQuestionarioNoBD2(int processoPeticaoId)
+        {
+            ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);            
+            string TextoPeticao = processoPeticao.PeticaoModelo.PeticaoModificada;
 
+            if (TextoPeticao == null)
+                return;
 
+            var perguntasEncontradas = new Regex(@"\[.*?\]").Matches(TextoPeticao);
 
+            //System.Diagnostics.Debug.WriteLine("******************************peticaoModelo.Nome" + processoPeticao.PeticaoModelo.Nome);
 
-
-
-
-
-
-
-
-
+            foreach (Match pergunta in perguntasEncontradas)
+            {                
+                db.Questionarios.Add(new Questionario
+                {
+                    ProcessoPeticaoId = processoPeticao.ProcessoPeticaoId,                    
+                    Pergunta = pergunta.Value,
+                    DataModificacao = DateTime.Today
+                });
+            }
+            db.SaveChanges();
+        }
 
 
 
