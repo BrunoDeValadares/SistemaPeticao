@@ -32,9 +32,122 @@ namespace Sistema_Advocacia.gerador
     {
         private DBContext db = new DBContext();
 
+        //2-Inseri anexos da Petição no banco de dados
+        //public void GerarAnexosNoBD(string peticao, List<Questionario> questionariosRespondidos, int processoPeticaoId)
+        public void GerarAnexosNoBD(int processoPeticaoId)
+        {
+            //var templatePath = System.Web.HttpContext.Current.Server.MapPath("~/Templates/report.xlsx");
+
+
+            //var anexosDoQuestionario = new Regex(@"doc_\d{1,3}").Matches(peticao);
+            //var anexosDoQuestionario = ExtrairAnexosDoQuestionario(peticao, questionariosRespondidos);
+            var processopeticao = db.ProcessoPeticaos.Find(processoPeticaoId);
+            var processoId = (int)processopeticao.ProcessoId;
+            var peticao = processopeticao.PeticaoModelo.PeticaoModificada;
+
+            var anexosDoQuestionario = new Regex(@"doc_(\d{1,3})").Matches(peticao);
+
+
+            //var processoId = (int)questionariosRespondidos.First().ProcessoPeticao.ProcessoId;          
+            foreach (Match anexoDoQuestionario in anexosDoQuestionario)
+            {
+                var anexoId = int.Parse(anexoDoQuestionario.Groups[1].Value);
+                if (!db.ProcessoDocumentoes.Any(pd => pd.ProcessoId == processoId & pd.DocumentoId == anexoId))
+                    db.ProcessoDocumentoes.Add(new ProcessoDocumento { DocumentoId = anexoId, ProcessoId = processoId });
+            }
+
+            db.SaveChanges();
+        }
+        
+        /*Documentação
+        Daqui em diante serve pra todos documentos gerados
+        a) Validar perguntas repetidas: PeticaModeloControler/Create ;  PeticaoModeloControler/Edit
+        b) MontarPetição/Documento - substituir pergunta por respostas: Model\ProcessoPeticao.cs\PeticaoRespondida (é um campo calculado da model ProcessoPeticao)
+        */
+
+        //Gerar Questionário
+        public void GerarQuestionarioNoBD(int processoPeticaoId)
+        {
+            ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);
+            string TextoPeticao = processoPeticao.PeticaoModelo.PeticaoModificada;
+
+            if (TextoPeticao == null)
+                return;
+
+            var perguntasEncontradas = new Regex(@"\[.*?\]").Matches(TextoPeticao);
+
+            //System.Diagnostics.Debug.WriteLine("******************************peticaoModelo.Nome" + processoPeticao.PeticaoModelo.Nome);
+
+            foreach (Match pergunta in perguntasEncontradas)
+            {
+                db.Questionarios.Add(new Questionario
+                {
+                    ProcessoPeticaoId = processoPeticao.ProcessoPeticaoId,
+                    Pergunta = pergunta.Value,
+                    DataModificacao = DateTime.Today
+                });
+            }
+            db.SaveChanges();
+        }
+
+        
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public string MontarPeticao(string peticao, List<Questionario> questionarios)
+        {
+            StringBuilder peticaoFinalizada = new StringBuilder();
+            peticaoFinalizada.Append(peticao);
+            if (peticao == null || questionarios == null)
+                return null;
+
+            //substitua perguntas por respostas
+            foreach (var questionario in questionarios)
+            {
+                peticaoFinalizada.Replace(questionario.Pergunta, questionario.Resposta);
+            }
+
+            //remova as anotações feitas petição
+            //string padrao = @"[&\{\}\[\]]";
+            string padrao = @"[&\{\}]";
+            var peticaoSemMarcadores = Regex.Replace(peticaoFinalizada.ToString(), padrao, "");
+
+            return peticaoSemMarcadores;
+            //var texto = peticaoFinalizada.ToString();
+            //var texto = peticaoFinalizada.ToString();
+
+            /*            
+            peticaoFinalizada.Replace("{", "");
+            peticaoFinalizada.Replace("}", "");
+            peticaoFinalizada.Replace("&", "");
+            peticaoFinalizada.Replace("[", "");
+            peticaoFinalizada.Replace("]", "");
+
+            
+            */
+
+            //return peticaoFinalizada.ToString();
+
+        }
 
 
         //Perguntas 
@@ -94,7 +207,7 @@ namespace Sistema_Advocacia.gerador
         }
 
         //3-Gere o questionário
-        public void GerarQuestionarioNoBD(int processoPeticaoId)
+        public void GerarQuestionarioNoBD2(int processoPeticaoId)
         {
             ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);
             //PeticaoModelo peticaoModelo = db.PeticaoModeloes.Find(peticaoModeloId);
@@ -120,42 +233,7 @@ namespace Sistema_Advocacia.gerador
             db.SaveChanges();
         }
 
-        //04-Montar petição
-        public string MontarPeticao(string peticao, List<Questionario> questionarios)
-        {            
-            StringBuilder peticaoFinalizada = new StringBuilder();
-            peticaoFinalizada.Append(peticao) ;
-            if (peticao == null || questionarios == null)
-                return null;
-
-            //substitua perguntas por respostas
-            foreach (var questionario in questionarios)
-            {
-                peticaoFinalizada.Replace(questionario.Pergunta, questionario.Resposta);                
-            }
-
-            //remova as anotações feitas petição
-            //string padrao = @"[&\{\}\[\]]";
-            string padrao = @"[&\{\}]";
-            var peticaoSemMarcadores =Regex.Replace(peticaoFinalizada.ToString(), padrao, "");
-
-            return peticaoSemMarcadores;
-            //var texto = peticaoFinalizada.ToString();
-            //var texto = peticaoFinalizada.ToString();
-
-            /*            
-            peticaoFinalizada.Replace("{", "");
-            peticaoFinalizada.Replace("}", "");
-            peticaoFinalizada.Replace("&", "");
-            peticaoFinalizada.Replace("[", "");
-            peticaoFinalizada.Replace("]", "");
-
-            
-            */
-
-            //return peticaoFinalizada.ToString();
-
-        }
+ 
 
         //ANEXOS
         //0-extrai anexos da petição dada como parametro
@@ -204,12 +282,16 @@ namespace Sistema_Advocacia.gerador
             return anexosQuestionario.ToList();
         }
 
+
+        /*
         //2-Inseri anexos da Petição no banco de dados após removido anexos de trechos de questões não respondidas.
         public void GerarAnexosNoBD(string peticao, List<Questionario> questionariosRespondidos)
         {
             //var templatePath = System.Web.HttpContext.Current.Server.MapPath("~/Templates/report.xlsx");
 
             var anexosDoQuestionario = ExtrairAnexosDoQuestionario(peticao, questionariosRespondidos);
+            //var anexosDoQuestionario = new Regex(@"doc_\d{1,3}").Matches(peticao);
+
             var processoId = (int)questionariosRespondidos.First().ProcessoPeticao.ProcessoId;
 
             foreach (var anexoDoQuestionario in anexosDoQuestionario)
@@ -220,33 +302,7 @@ namespace Sistema_Advocacia.gerador
 
             db.SaveChanges();
         }
-
-
-        //Gerar Questionário
-        public void GerarQuestionarioNoBD2(int processoPeticaoId)
-        {
-            ProcessoPeticao processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);            
-            string TextoPeticao = processoPeticao.PeticaoModelo.PeticaoModificada;
-
-            if (TextoPeticao == null)
-                return;
-
-            var perguntasEncontradas = new Regex(@"\[.*?\]").Matches(TextoPeticao);
-
-            //System.Diagnostics.Debug.WriteLine("******************************peticaoModelo.Nome" + processoPeticao.PeticaoModelo.Nome);
-
-            foreach (Match pergunta in perguntasEncontradas)
-            {                
-                db.Questionarios.Add(new Questionario
-                {
-                    ProcessoPeticaoId = processoPeticao.ProcessoPeticaoId,                    
-                    Pergunta = pergunta.Value,
-                    DataModificacao = DateTime.Today
-                });
-            }
-            db.SaveChanges();
-        }
-
+        */
 
 
         /*
@@ -280,6 +336,5 @@ namespace Sistema_Advocacia.gerador
                 }
 
         */
-
     }
 }

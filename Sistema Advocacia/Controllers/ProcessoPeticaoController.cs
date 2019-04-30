@@ -20,11 +20,11 @@ namespace Sistema_Advocacia.Controllers
 
         public ActionResult GerarPeticao(int id)
         {
-            GerarDocumento gerarDocumento = new GerarDocumento();
+            var gerarDocx = new GerarDocx();
             var processoPeticao = db.ProcessoPeticaos.Find(id);            
 
-            var peticao = gerarDocumento.construirPeticao(processoPeticao);
-            gerarDocumento.gerarDocumento(peticao);         
+            var peticao = gerarDocx.construirPeticao(processoPeticao);
+            gerarDocx.gerarDocumento(peticao);         
 
             return View();
         }
@@ -110,7 +110,8 @@ namespace Sistema_Advocacia.Controllers
 
                 GerarQuestionario gerarQuestionario = new GerarQuestionario();
                 //gerarQuestionario.GerarQuestionarioNoBD(processoPeticao.ProcessoPeticaoId);
-                gerarQuestionario.GerarQuestionarioNoBD2(processoPeticao.ProcessoPeticaoId);
+                gerarQuestionario.GerarQuestionarioNoBD(processoPeticao.ProcessoPeticaoId);
+                gerarQuestionario.GerarAnexosNoBD(processoPeticao.ProcessoPeticaoId);
 
                 return RedirectToAction("TodoProcesso", "Processo", new { id = processoPeticao.ProcessoId });
             }

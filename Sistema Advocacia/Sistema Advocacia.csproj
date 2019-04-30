@@ -206,6 +206,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ClienteDocumentoController.cs" />
     <Compile Include="Controllers\DocumentoController.cs" />
+    <Compile Include="Controllers\DocumentoModeloController.cs" />
     <Compile Include="Controllers\GerarWordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -220,7 +221,7 @@
     <Compile Include="Controllers\QuestionarioController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="gerador\GerarArquivo.cs" />
-    <Compile Include="gerador\GerarDocumento.cs" />
+    <Compile Include="gerador\GerarDocx.cs" />
     <Compile Include="gerador\GerarQuestionario.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -235,6 +236,7 @@
     <Compile Include="Models\ClienteDocumento.cs" />
     <Compile Include="Models\Colaborador.cs" />
     <Compile Include="Models\Documento.cs" />
+    <Compile Include="Models\DocumentoModelo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\keyAttribute.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -264,6 +266,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\HtmlPage1.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -388,6 +391,11 @@
     <Content Include="Views\ProcessoParte\Details.cshtml" />
     <Content Include="Views\ProcessoParte\Edit.cshtml" />
     <Content Include="Views\ProcessoParte\Index.cshtml" />
+    <Content Include="Views\DocumentoModelo\Create.cshtml" />
+    <Content Include="Views\DocumentoModelo\Delete.cshtml" />
+    <Content Include="Views\DocumentoModelo\Details.cshtml" />
+    <Content Include="Views\DocumentoModelo\Edit.cshtml" />
+    <Content Include="Views\DocumentoModelo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -151,13 +151,31 @@ namespace Sistema_Advocacia.Controllers
             int processoId = (int)processoPeticao.ProcessoId;
 
             GerarQuestionario gerarQuestionario = new GerarQuestionario();
+            gerarQuestionario.GerarAnexosNoBD((int)processoPeticaoId);
+
+
+            return RedirectToAction("TodoProcesso", "Processo", new { id = processoId });
+            //@Html.ActionLink("Voltar", "TodoProcesso", "Processo", new { id = Model.First().ProcessoPeticao.ProcessoId }, null)
+        }
+
+        //apagar
+        /*
+        public ActionResult Finalizar(int? processoPeticaoId)
+        {
+            var questionarios = db.Questionarios.Where(q => q.ProcessoPeticaoId == processoPeticaoId).ToList();
+            var processoPeticao = db.ProcessoPeticaos.Find(processoPeticaoId);
+            var peticao = processoPeticao.PeticaoModelo.PeticaoModificada;
+            int processoId = (int)processoPeticao.ProcessoId;
+
+            GerarQuestionario gerarQuestionario = new GerarQuestionario();
             gerarQuestionario.GerarAnexosNoBD(peticao, questionarios);          
             
 
             return RedirectToAction("TodoProcesso", "Processo", new { id = processoId });
             //@Html.ActionLink("Voltar", "TodoProcesso", "Processo", new { id = Model.First().ProcessoPeticao.ProcessoId }, null)
         }
-        
+        */
+
 
 
         /*

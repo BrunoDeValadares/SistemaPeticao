@@ -1,4 +1,5 @@
-﻿using Sistema_Advocacia.gerador;
+﻿using Sistema_Advocacia.Context;
+using Sistema_Advocacia.gerador;
 using Sistema_Advocacia.Models;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,12 @@ namespace Testes_c_charpe
             //ExtrairPerguntas();
             //testarRegexNegrito2();
             //testarStringBuilder();
-            testarRegexPerguntas();
+            //testarRegexPerguntas();
+            //TestarValidarRegexPerguntas();
+            //TestarRegexAnexo();
+            //TestarRegexTituloReplace();
+            //Assinatura();
+            RegexComecandoDoFim();
         }
 
         static void TestarRegexSubTitulo()
@@ -249,10 +255,6 @@ namespace Testes_c_charpe
             Console.ReadKey();
         }
 
-
-
-
-
         static void TestarRegexNegrito()
         {
             //string txt = "corpo de texto\nTitulo1-de \n---\nCorpo de**negrito aqui. E seguindo, __**sublinhado aqui**__texto, e _texto italico_ aqui\nSubTitulo-de jogardores\n---\n---\nCorpo de texto";
@@ -346,6 +348,124 @@ namespace Testes_c_charpe
             Console.WriteLine(perguntas.Count);
 
             Console.ReadKey();
+        }
+        static void TestarValidarRegexPerguntas()
+        {
+            //string txt = "SubTitulo1\n----\ntexto texto [pergunta01+1 aqui neste trecho] [pergunta01+1 aqui neste trecho] texto [pergunta01.2 aqui neste trecho] texto \nSubTitulo2\n---- texto [pergunta02.1 aqui neste trecho] texto [pergunta02.2 aqui neste trecho]";
+            string txt = "SubTitulo1\n----\ntexto texto [pergunta01+1 aqui neste trecho] [pergunta01+1 aqui neste trecho] ";
+
+            var perguntas = new Regex(@"\[.*?\]").Matches(txt);
+            var perguntasUnicas = perguntas.OfType<Match>().Select(m => m.Groups[0].Value).Distinct();
+
+            /*
+            if (perguntas.Count > perguntasUnicas.Count())
+                Console.WriteLine("sim");
+            else
+                Console.WriteLine("não");
+            */
+
+            Console.WriteLine("perguntas");
+            foreach (Match item in perguntas)
+            {
+                Console.WriteLine(item.Value);                
+            }
+
+            Console.WriteLine("perguntas unicas");            
+            foreach (var item in perguntasUnicas)
+            {
+                Console.WriteLine(item);
+            }
+
+            /*
+            Console.WriteLine(perguntas.Count);
+            Console.WriteLine(perguntasUnicas.Count());
+            */
+
+            Console.ReadKey();
+
+        }
+
+        static void TestarRegexAnexo()
+        {
+            string Texto = "{jogador gogue doc_35 e que pode ir pra csa doc_37, na sua casa}";
+            var anexosDoQuestionario = new Regex(@"doc_(\d{1,3})").Matches(Texto);
+            foreach (Match item in anexosDoQuestionario)            
+                Console.WriteLine(item.Groups[1].Value);
+            Console.ReadKey();            
+        }
+
+        static void TestarRegexTituloReplace()
+        {
+            #region
+            /*
+            string txt = "   Títulão1\n----\n-----\nSubTitulo1\n----\ntexto texto [pergunta01+1 aqui neste trecho] texto [pergunta01.2 aqui neste trecho] texto \nSubTitulo2\n---- texto [pergunta02.1 aqui neste trecho] texto [pergunta02.2 aqui neste trecho]";
+            string txt1 = "Topico1";            
+            var modeloPeticao = dB.PeticaoModeloes.Find(1);
+            var txt3 = modeloPeticao.PeticaoModificada;
+            var peticaoComTitulos = Regex.Replace(txt4, @".*\n-{3,}\n-{3,}", "[Ttulo1]$0");
+            var peticaoComTitulos = Regex.Replace(txt4, @".*-{3,}", "[Ttulo2]$0");
+            var peticaoComTitulos = Regex.Replace(documento, @"(.*)\r\n-{3,}\r\n-{3,}", "[Ttulo1]$0");
+            var peticaoComTitulos1 = Regex.Replace(txt, @"\e", "[s]");
+            var peticaoComTitulos2 = Regex.Replace(txt4, @"", "[wanderlei]");
+            Console.WriteLine(peticaoComTitulos);            
+            Console.WriteLine(peticaoComTitulos1);
+
+            System.Diagnostics.Debug.WriteLine("[---------------------]" + peticaoComTitulos1 + "[[]]");
+            //Console.WriteLine(txt4);
+
+            */
+            #endregion
+
+            DBContext dB = new DBContext();
+
+            BD db = new BD();
+
+            var txt4 =  db.PeticaoModelo.Find(1).PeticaoModificada;
+            txt4 = txt4.Substring(0, 300);
+
+
+            var peticaoComTitulos1 = Regex.Replace(txt4, @".*\n-{3,}\r\n-{3,}", "[Ttulo1]$0");            
+            Console.WriteLine(peticaoComTitulos1);
+
+            /*
+            Console.WriteLine("\n\n\n");
+            peticaoComTitulos1 = Regex.Replace(peticaoComTitulos1, @"\r\n-{3,}\r\n-{3,}", "");
+            Console.WriteLine(peticaoComTitulos1);
+            
+            Console.WriteLine("\n\n\n");
+            peticaoComTitulos1 = Regex.Replace(peticaoComTitulos1, @".*\r\n-{3,}", "[Ttulo2]$0");            
+            peticaoComTitulos1 = Regex.Replace(peticaoComTitulos1, @"\r\n-{3,}", "");
+            Console.WriteLine(peticaoComTitulos1);
+            */
+
+            Console.ReadKey();
+
+        }
+
+        static void Assinatura()
+        {
+            var data = DateTime.Today;
+            //var dataExtenso = "Goiânia, " + data.ToString("dd") + " de " + data.ToString("MMMM") + " de " + data.ToString("yyyy") + ".";
+
+            var dataExtenso = "Goiânia, " +  DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy");
+
+            Console.WriteLine(dataExtenso);
+            Console.ReadKey();
+        }
+        static void RegexComecandoDoFim()
+        {
+
+
+            //var txt = new Regex(@"[^/]*").Match("c/fonte1/fonte2/arquivos/modelo.dox").Groups[0].Value;
+            //var txt = new Regex(@"arquivos/(.*)").Match("c/fonte1/fonte2/arquivos/modelo.dox").Groups[1].Value;
+            var txt = new Regex(@"[^/]*$").Match("c/fonte1/fonte2/arquivos/modelo.dox").Value;
+
+
+
+
+            Console.WriteLine("resp" + txt);
+            Console.ReadKey();
+
 
 
         }
@@ -356,3 +476,4 @@ namespace Testes_c_charpe
 
 
 }
+

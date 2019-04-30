@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace Sistema_Advocacia.Models
@@ -51,9 +53,37 @@ namespace Sistema_Advocacia.Models
         [DataType(DataType.Date)]
         public DateTime? DataProtocolizacao { get; set; }
 
-        
+        //Montar documento/petição: Substituir perguntas por respostas
         [NotMapped]
         public string PeticaoRespondida
+        {
+            get
+            {             
+                StringBuilder peticaoRespondida = new StringBuilder();
+                peticaoRespondida.Append(PeticaoModelo.PeticaoModificada);
+
+                DBContext db = new DBContext();
+                var questionarios = db.Questionarios.Where(q => q.ProcessoPeticaoId == ProcessoPeticaoId).ToList();
+
+                if (questionarios.Count > 0)
+                {
+                    foreach (var questionario in questionarios)
+                    {
+                        peticaoRespondida.Replace(questionario.Pergunta, questionario.Resposta);
+                    }
+                }             
+
+                //var peticaoSemMarcadores = Regex.Replace(peticaoRespondida.ToString(), @"\[|\]", "");
+
+                return peticaoRespondida.ToString();
+            }
+        }
+
+
+
+        //apagar
+        [NotMapped]
+        public string PeticaoRespondida2
         {
             get
             {

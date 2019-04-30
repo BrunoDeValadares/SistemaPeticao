@@ -54,7 +54,7 @@ namespace Sistema_Advocacia.Controllers
         public ActionResult Create([Bind(Include = "PeticaoModeloId,Nome,NaturezaAcaoId,Comentario, PeticaoOriginal, PeticaoModificada, NomeAcao")] PeticaoModelo peticaoModelo)
         {
             var perguntas = new Regex(@"\[.*?\]").Matches(peticaoModelo.PeticaoModificada);
-            var perguntasUnicas = new Regex(@"\[.*?\]").Matches(peticaoModelo.PeticaoModificada).OfType<Match>().Distinct();
+            var perguntasUnicas = perguntas.OfType<Match>().Distinct();
 
             if (perguntas.Count > perguntasUnicas.Count())
                 ModelState.AddModelError("PeticaoModificada", "Existem perguntas duplicadas. Nenhuma pergunta pode ser igual a outra.");
@@ -149,12 +149,11 @@ namespace Sistema_Advocacia.Controllers
         public ActionResult Edit([Bind(Include = "PeticaoModeloId,Nome,NaturezaAcaoId,Comentario, PeticaoOriginal, PeticaoModificada, NomeAcao")] PeticaoModelo peticaoModelo)
         {
             //Validação: vedar no campo Petição anotada perguntas identicas
-            var perguntas = new Regex(@"\[.*?\]").Matches(peticaoModelo.PeticaoModificada);
-            var perguntasUnicas = new Regex(@"\[.*?\]").Matches(peticaoModelo.PeticaoModificada).OfType<Match>().Distinct();
+            var perguntas = new Regex(@"\[.*?\]").Matches(peticaoModelo.PeticaoModificada);            
+            var perguntasUnicas = perguntas.OfType<Match>().Select(m => m.Groups[0].Value).Distinct();
 
             if (perguntas.Count > perguntasUnicas.Count())
-                ModelState.AddModelError("PeticaoModificada", "Existem perguntas duplicadas. Nenhuma pergunta pode ser igual a outra.");
-            
+                ModelState.AddModelError("PeticaoModificada", "Existem perguntas duplicadas. Nenhuma pergunta pode ser igual a outra.");            
 
             //daqui em diante, nada alterado. 
             if (ModelState.IsValid)
